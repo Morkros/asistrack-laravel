@@ -13,10 +13,10 @@
             <div class="card">
                 <div class="card-header">
                     <div class="float-start">
-                        Edit Student
+                        Editar estudiante
                     </div>
                     <div class="float-end">
-                        <a href="{{ route('students.index') }}" class="btn btn-primary btn-sm">&larr; Back</a>
+                        <a href="{{ route('students.index') }}" class="btn btn-primary btn-sm">&larr; Volver</a>
                     </div>
                 </div>
                 <div class="card-body">
@@ -71,19 +71,7 @@
                         </div>
 
                         <div class="mb-3 row">
-                            <label for="grupo" class="col-md-4 col-form-label text-md-end text-start">Grupo</label>
-                            <div class="col-md-6">
-                                <select class="form-control @error('grupo') is-invalid @enderror" id="grupo" name="grupo">
-                                    <option value="A" {{ $students->grupo == 'A' ? 'selected' : '' }}>A</option>
-                                    <option value="B" {{ $students->grupo == 'B' ? 'selected' : '' }}>B</option>
-                                </select>
-                                @if ($errors->has('grupo'))
-                                    <span class="text-danger">{{ $errors->first('grupo') }}</span>
-                                @endif
-                            </div>
-                        </div>
-                        <div class="mb-3 row">
-                            <input type="submit" class="col-md-3 offset-md-5 btn btn-primary" value="Update">
+                            <input type="submit" class="col-md-3 offset-md-5 btn btn-primary" value="Actualizar">
                         </div>
 
                     </form>

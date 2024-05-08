@@ -8,10 +8,10 @@
         <div class="card">
             <div class="card-header">
                 <div class="float-start">
-                    Student Information
+                    Información del estudiante
                 </div>
                 <div class="float-end">
-                    <a href="{{ route('students.index') }}" class="btn btn-primary btn-sm">&larr; Back</a>
+                    <a href="{{ route('students.index') }}" class="btn btn-primary btn-sm">&larr; Volver</a>
                 </div>
             </div>
             <div class="card-body">
@@ -26,28 +26,21 @@
                     <div class="row">
                         <label for="nombre" class="col-md-4 col-form-label text-md-end text-start"><strong>Nombre:</strong></label>
                         <div class="col-md-6" style="line-height: 35px;">
-                            {{ $student->nombre }}
+                            {{ $student->name }}
                         </div>
                     </div>
                     
                     <div class="row">
                         <label for="apellido" class="col-md-4 col-form-label text-md-end text-start"><strong>Apellido:</strong></label>
                         <div class="col-md-6" style="line-height: 35px;">
-                            {{ $student->apellido }}
+                            {{ $student->lastname }}
                         </div>
                     </div>
 
                     <div class="row">
                         <label for="nacimiento" class="col-md-4 col-form-label text-md-end text-start"><strong>nacimiento:</strong></label>
                         <div class="col-md-6" style="line-height: 35px;">
-                            {{ $student->nacimiento }}
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <label for="grupo" class="col-md-4 col-form-label text-md-end text-start"><strong>Grupo:</strong></label>
-                        <div class="col-md-6" style="line-height: 35px;">
-                            {{ $student->grupo }}
+                            {{ $student->birthdate }}
                         </div>
                     </div>
         

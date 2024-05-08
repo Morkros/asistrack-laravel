@@ -39,8 +39,6 @@ Route::middleware('auth')->group(function () {
     
     Route::get('assist/{dni}', [AssistController::class,"show"])->name("assists.show");
     
-    Route::resource('products', ProductController::class);
-
     //PERMITE EL USAR EL DASHBOARD (PARA EVITAR PROBLEMAS EN NAVIGATION.BLADE.APP, HASTA QUE SEA EDITADO)
     Route::get('/dashboard', function () {
         return view('dashboard');
