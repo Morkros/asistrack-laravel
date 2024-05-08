@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('assists', function (Blueprint $table) {
             $table->id();
-            $table->integer('student_id');
+            $table->integer('student_dni')->unique();
             $table->timestamps();
-            $table->foreign('student_id')->references('dni')->on('students');
+            $table->foreign('student_dni')->references('dni')->on('students');
         });
     }
 

@@ -15,7 +15,7 @@ class StudentController extends Controller
     {
         $students = Student::all();
         //return $students;
-        return view('students.index',['students' => Student::all()]);
+        return view('students.index',['students' => $students]);
     }
 
     public function create() : View
@@ -27,7 +27,7 @@ class StudentController extends Controller
     {
         Student::create($request->all());
         return redirect()->route('students.index')
-                ->withSuccess('New Student is added successfully.');
+                ->withSuccess('Nuevo estudiante añadido correctamente.');
     }
 
     public function show(Student $student) : View
@@ -48,13 +48,13 @@ class StudentController extends Controller
     {
         $student->update($request->all());
         return redirect()->back()
-                ->withSuccess('Student is updated successfully.');
+                ->withSuccess('Estudiante actualizado correctamente.');
     }
     
     public function destroy(Student $student) : RedirectResponse
     {
         $student->delete();
         return redirect()->route('students.index')
-                ->withSuccess('Student is deleted successfully.');
+                ->withSuccess('Estudiante eliminado correctamente.');
     }
 }

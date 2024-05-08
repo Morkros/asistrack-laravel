@@ -8,13 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Assist extends Model
 {
     protected $id;
-    protected $fecha;
 
     use HasFactory;
     protected $fillable = [
         'id',
-        'student_id',
-        'fecha',
+        'student_id'
     ];
 
     public function student() {

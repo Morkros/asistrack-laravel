@@ -24,10 +24,9 @@ class UpdateStudentRequest extends FormRequest
         return [
                 'id' => 'required|numeric|unique:students,id,'.$this->student->id,
                 'dni' => 'required|numeric',
-                'nombre' => 'required|string|max:250',
-                'apellido' => 'required|string|max:250',
-                'nacimiento' => 'required',
-                'grupo' => 'nullable'
+                'name' => 'required|string|max:250',
+                'lastname' => 'required|string|max:250',
+                'birthdate' => 'required'
             ];
     }
 }

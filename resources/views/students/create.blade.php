@@ -8,10 +8,10 @@
         <div class="card">
             <div class="card-header">
                 <div class="float-start">
-                    Add New Product
+                    Añadir nuevo estudiante
                 </div>
                 <div class="float-end">
-                    <a href="{{ route('students.index') }}" class="btn btn-primary btn-sm">&larr; Back</a>
+                    <a href="{{ route('students.index') }}" class="btn btn-primary btn-sm">&larr; Volver</a>
                 </div>
             </div>
             <div class="card-body">
@@ -29,50 +29,37 @@
                     </div>
 
                     <div class="mb-3 row">
-                        <label for="nombre" class="col-md-4 col-form-label text-md-end text-start">Nombre</label>
+                        <label for="name" class="col-md-4 col-form-label text-md-end text-start">Nombre</label>
                         <div class="col-md-6">
-                          <input type="text" class="form-control @error('nombre') is-invalid @enderror" id="nombre" name="nombre" value="{{ old('nombre') }}">
-                            @if ($errors->has('nombre'))
-                                <span class="text-danger">{{ $errors->first('nombre') }}</span>
+                          <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name') }}">
+                            @if ($errors->has('name'))
+                                <span class="text-danger">{{ $errors->first('name') }}</span>
                             @endif
                         </div>
                     </div>
 
                     <div class="mb-3 row">
-                        <label for="apellido" class="col-md-4 col-form-label text-md-end text-start">Apellido</label>
+                        <label for="lastname" class="col-md-4 col-form-label text-md-end text-start">Apellido</label>
                         <div class="col-md-6">
-                          <input type="text" class="form-control @error('apellido') is-invalid @enderror" id="apellido" name="apellido" value="{{ old('apellido') }}">
-                            @if ($errors->has('apellido'))
-                                <span class="text-danger">{{ $errors->first('apellido') }}</span>
+                          <input type="text" class="form-control @error('lastname') is-invalid @enderror" id="lastname" name="lastname" value="{{ old('lastname') }}">
+                            @if ($errors->has('lastname'))
+                                <span class="text-danger">{{ $errors->first('lastname') }}</span>
                             @endif
                         </div>
                     </div>
 
                     <div class="mb-3 row">
-                        <label for="nacimiento" class="col-md-4 col-form-label text-md-end text-start">Nacimiento</label>
+                        <label for="birthdate" class="col-md-4 col-form-label text-md-end text-start">Nacimiento</label>
                         <div class="col-md-6">
-                          <input type="date" class="form-control @error('nacimiento') is-invalid @enderror" id="nacimiento" name="nacimiento" value="{{ old('nacimiento') }}">
-                            @if ($errors->has('nacimiento'))
-                                <span class="text-danger">{{ $errors->first('nacimiento') }}</span>
-                            @endif
-                        </div>
-                    </div>
-
-                    <div class="mb-3 row">
-                        <label for="grupo" class="col-md-4 col-form-label text-md-end text-start">Grupo</label>
-                        <div class="col-md-6">
-                            <select class="form-control @error('description') is-invalid @enderror" id="grupo" name="grupo">
-                                <option value="A">A</option>
-                                <option value="B">B</option>
-                            </select>
-                            @if ($errors->has('grupo'))
-                                <span class="text-danger">{{ $errors->first('grupo') }}</span>
+                          <input type="date" class="form-control @error('birthdate') is-invalid @enderror" id="birthdate" name="birthdate" value="{{ old('birthdate') }}">
+                            @if ($errors->has('birthdate'))
+                                <span class="text-danger">{{ $errors->first('birthdate') }}</span>
                             @endif
                         </div>
                     </div>
                     
                     <div class="mb-3 row">
-                        <input type="submit" class="col-md-3 offset-md-5 btn btn-primary" value="Add Student">
+                        <input type="submit" class="col-md-3 offset-md-5 btn btn-primary" value="Añadir estudiante">
                     </div>
                     
                 </form>

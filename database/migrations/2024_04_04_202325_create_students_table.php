@@ -14,13 +14,13 @@ return new class extends Migration
         Schema::create('students', function (Blueprint $table) {
             $table->id();
             $table->integer('dni')->unique();
-            $table->string('nombre');
-            $table->string('apellido');
-            $table->date('nacimiento');
-            $table->enum('grupo',['A','B']);
+            $table->string('name', 30);
+            $table->string('lastname', 30);
+            $table->date('birthdate');
             $table->timestamps();
         });
     }
+    
 
     /**
      * Reverse the migrations.

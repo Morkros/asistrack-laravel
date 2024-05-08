@@ -23,10 +23,9 @@ class StoreStudentRequest extends FormRequest
     {
         return [
             'dni' => 'required|numeric|max:999999999|unique:students,dni',
-            'nombre' => 'required|string|max:250',
-            'apellido' => 'required|string|max:250',
-            'nacimiento' => 'required',
-            'grupo' => 'nullable'
+            'name' => 'required|string|max:250',
+            'lastname' => 'required|string|max:250',
+            'birthdate' => 'required'
         ];
     }
 }
