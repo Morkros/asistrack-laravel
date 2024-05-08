@@ -17,16 +17,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//Route::get('/', function () {
+//Route::get('/', function () { LLEVA AL WELCOME AL ENTRAR A LA PAGINA
 //    return view('welcome');
 //});
-Route::redirect('/', 'dashboard');
 
-/* Route::get('/dashboard', function () {
+//Route::redirect('/', 'index'); CREA UN REDIRECT HACIA EL INDEX DE ESTUDIANTES
+
+/* Route::get('/dashboard', function () { AL AUTENTIFICAR AL USUARIO, LO ENVIA AL DASHBOARD
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard'); */
 
-Route::get('index', [StudentController::class, "index"])->middleware(['auth', 'verified'])->name('dashboard');
+//CONVIERTE A INDEX EN LA VISTA INICIAL
+Route::get('/', [StudentController::class, 'index'])->middleware(['auth', 'verified']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -38,6 +40,11 @@ Route::middleware('auth')->group(function () {
     Route::get('assist/{dni}', [AssistController::class,"show"])->name("assists.show");
     
     Route::resource('products', ProductController::class);
+
+    //PERMITE EL USAR EL DASHBOARD (PARA EVITAR PROBLEMAS EN NAVIGATION.BLADE.APP, HASTA QUE SEA EDITADO)
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
     
 });
 require __DIR__.'/auth.php';
