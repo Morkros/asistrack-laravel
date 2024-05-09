@@ -15,6 +15,8 @@
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
 
+@include('students.search')
+
 <!--EMPIEZA EL DIV DE AÑADIR ALUMNO-->
                     <div class="flex justify-center items-center mt-3">
                         <div class="w-full">
@@ -44,7 +46,7 @@
                                             <td class="border border-gray-600 px-4 py-2 text-center">{{ $student->dni }}</td>
                                             <td class="border border-gray-600 px-4 py-2 text-center">{{ $student->name }}</td>
                                             <td class="border border-gray-600 px-4 py-2 text-center">{{ $student->lastname }}</td>
-                                            <td class="border border-gray-600 px-4 py-2 text-center">{{ $student->birthdate }}</td>
+                                            <td class="border border-gray-600 px-4 py-2 text-center">{{ date('d-m-Y', strtotime($student->birthdate)) }}</td>
                                             <td class="border border-gray-600 px-4 py-2 text-center">
                                                 <form action="{{ route('students.destroy', $student->id) }}" method="post">
                                                     @csrf
@@ -64,7 +66,7 @@
                                         <tr>
                                             <td colspan="6">
                                                 <span class="text-red-500">
-                                                    <strong>No Student Found!</strong>
+                                                    <strong>No se encontraron estudiantes</strong>
                                                 </span>
                                             </td>
                                         </tr>

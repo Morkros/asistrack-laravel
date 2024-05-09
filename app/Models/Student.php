@@ -20,6 +20,10 @@ class Student extends Model
     ];
 
     public function assist(){
-        return $this -> hasmany(Assist::class);
+        return $this -> hasMany(Assist::class);
+    }
+
+    public function grade(){
+        return $this -> hasOne(Grade::class);
     }
 }

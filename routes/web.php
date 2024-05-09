@@ -35,6 +35,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     
+    Route::post('/students/search', [StudentController::class, 'search'])->name('students.search');
     Route::resource('students', StudentController::class);
     
     Route::get('assist/{dni}', [AssistController::class,"show"])->name("assists.show");

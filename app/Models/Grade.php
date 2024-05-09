@@ -5,14 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Assist extends Model
+class Grade extends Model
 {
-    protected $id;
-
     use HasFactory;
+
     protected $fillable = [
-        'id',
-        'student_id'
+        'total_class_days',
+        'promotion',
+        'regular'
     ];
 
     public function student() {

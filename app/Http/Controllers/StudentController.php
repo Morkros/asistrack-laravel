@@ -11,6 +11,19 @@ use App\Http\Requests\UpdateStudentRequest;
 
 class StudentController extends Controller
 {
+    public function search(Request $request)
+    {
+        /* $request->validate([
+            'name_search' => 'required|string|max:30',
+        ]); */
+    
+        $searchTerm = $request->input('name_search');
+    
+        $results = Student::where('name', 'like', '%' . $searchTerm . '%')->get();
+    
+        return view('students.index', ['results' => $results]);
+    }
+
     public function index() : view
     {
         $students = Student::all();
