@@ -1,0 +1,1 @@
+-incluir un vinculo en la barra de navegación llamado "buscar" que lleve a una ventana que contenga un buscador por dni, que incluya el botón añadir asistencia.

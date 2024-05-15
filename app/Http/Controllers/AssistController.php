@@ -52,9 +52,16 @@ class AssistController extends Controller
 
     public function storeInstant($id)
     {
-        Assist::create(['student_id' => $id]);
-        return redirect()->route('assists.index')
-                ->withSuccess('Asistencia añadida correctamente.');
+        date_default_timezone_set('America/Argentina/Buenos_Aires');
+        $date = date('Y-m-d');
+        $exists = Assist::where('student_id', 'like', $id)->whereDate('created_at', $date)->get();
+        dd($exists);
+        if ($exists->isEmpty()) { 
+            Assist::create(['student_id' => $id]);
+            return redirect()->route('assists.index')->withSuccess('Asistencia añadida correctamente.');
+        } else {
+            return redirect()->route('assists.index')->withError('Asistencia ya existente.');
+        }
     }
 
     /**
