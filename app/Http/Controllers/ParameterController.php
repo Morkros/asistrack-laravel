@@ -3,6 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Student;
+use App\Models\Parameter;
+use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
+use App\Http\Requests\StoreStudentRequest;
+use App\Http\Requests\UpdateStudentRequest;
 
 class ParameterController extends Controller
 {
@@ -11,7 +17,7 @@ class ParameterController extends Controller
      */
     public function index()
     {
-        //
+
     }
 
     /**
@@ -19,15 +25,18 @@ class ParameterController extends Controller
      */
     public function create()
     {
-        //
+        return view('profile.partials.create-or-update-parameter-form');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request) 
     {
-        //
+        Parameter::create($request->all());
+       
+        return redirect()->route('products.index')
+                        ->with('success','Product created successfully.');
     }
 
     /**
@@ -43,7 +52,7 @@ class ParameterController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        
     }
 
     /**

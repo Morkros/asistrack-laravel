@@ -13,8 +13,8 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         \App\Models\Student::factory(10)->create();
-        \App\Models\User::factory(10)->create();
-        \App\Models\Assist::factory(8)->create(); //la cantidad de registros creado es 8 para facilitar la busqueda
+        // \App\Models\User::factory(10)->create();
+        \App\Models\Assist::factory(10)->create(); //la cantidad de registros creado es 8 para facilitar la busqueda
 
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',

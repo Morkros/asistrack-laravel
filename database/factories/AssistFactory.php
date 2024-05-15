@@ -20,7 +20,7 @@ class AssistFactory extends Factory
              * y luego seleccionar de forma aleatoria un elemento para crear el registro de asistencia
              * (pluck trae los datos de una columna en forma de array)
              */
-            'student_id' => fake()->randomElement(Student::pluck('dni')),
+            'student_id' => fake()->randomElement(Student::pluck('id')),
         ];
     }
 }

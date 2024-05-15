@@ -12,6 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('parameters', function (Blueprint $table) {
+            $table->id();
             $table->integer('total_class_days')->nullable();
             $table->integer('promotion')->nullable();
             $table->integer('regular')->nullable();

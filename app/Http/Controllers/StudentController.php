@@ -11,24 +11,41 @@ use App\Http\Requests\UpdateStudentRequest;
 
 class StudentController extends Controller
 {
-    public function search(Request $request)
+/*     public function search(Request $request)
     {
-        /* $request->validate([
-            'name_search' => 'required|string|max:30',
-        ]); */
-    
         $searchTerm = $request->input('name_search');
     
-        $results = Student::where('name', 'like', '%' . $searchTerm . '%')->get();
-    
-        return view('students.index', ['results' => $results]);
-    }
+        //$results = Student::where('name', 'like', '%' . $searchTerm . '%')->get();
 
-    public function index() : view
+        $results = Student::where('name', 'like', '%' . $searchTerm . '%')
+        ->orWhere('lastname', 'like', '%' . $searchTerm . '%')
+        ->orWhereRaw("CONCAT(name, ' ', lastname) like ?", ['%' . $searchTerm . '%'])
+        ->get();
+
+        if ($results->isEmpty()) {
+            $results = Student::all();
+        }
+        return view('students.index', ['results' => $results]);
+    } */
+
+    public function index(Request $request)
     {
-        $students = Student::all();
+       /*  $students = Student::all();
         //return $students;
-        return view('students.index',['students' => $students]);
+        return view('students.index',['students' => $students]); */
+
+        $searchTerm = $request->input('name_search');
+
+        $results = Student::where('name', 'like', '%' . $searchTerm . '%')
+        ->orWhere('lastname', 'like', '%' . $searchTerm . '%')
+        ->orWhereRaw("CONCAT(name, ' ', lastname) like ?", ['%' . $searchTerm . '%'])
+        ->get();
+
+        if ($results->isEmpty()) {
+            $results = Student::all();
+        }
+
+        return view('students.index', ['results' => $results]);
     }
 
     public function create() : View

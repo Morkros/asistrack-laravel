@@ -35,10 +35,16 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     
-    Route::post('/students/search', [StudentController::class, 'search'])->name('students.search');
     Route::resource('students', StudentController::class);
-    
-    Route::get('assist/{dni}', [AssistController::class,"show"])->name("assists.show");
+
+    Route::get('assist/{id}', [AssistController::class,"storeInstant"])->name('assists.instant');
+    Route::get('assist', [AssistController::class,"index"])->name('assists.index');
+    Route::get('assist/late/{id}', [AssistController::class,"create"])->name('assists.create');
+
+    //muestra el calendario de asistencias
+    Route::get('/calendar', function () {
+        return view('assists.calendar');
+    })->name('calendar');
     
     //PERMITE EL USAR EL DASHBOARD (PARA EVITAR PROBLEMAS EN NAVIGATION.BLADE.APP, HASTA QUE SEA EDITADO)
     Route::get('/dashboard', function () {

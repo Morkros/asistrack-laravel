@@ -4,7 +4,7 @@
 <x-slot name="header">
         <div class="flex items-center">
             <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-                {{ __('Listado de alumnos') }}
+                {{ __('Listado para añadir asistencias') }}
             </h2>
             <x-user-icon class="h-5 w-auto fill-current text-gray-800 dark:text-gray-200 ml-2"></x-user-icon>
         </div>
@@ -16,7 +16,7 @@
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     <!--EMPIEZA EL DIV DE BUSCAR-->
                     <div class="text-center mt-5">
-                        <form action="{{ route('students.index') }}" method="GET">
+                        <form action="{{ route('assists.index') }}" method="GET">
                             <div class="space-y-4">
                                 <input type="text" class="w-5/6 text-black font-bold rounded" id="name_search" name="name_search" placeholder="Buscar por nombre">
                                 <br>
@@ -45,17 +45,12 @@
                             @endif
                         
                             <div class="rounded px-8 pt-6 pb-8 mb-4">
-                                <div class="mb-4">
-                                    <a href="{{ route('students.create') }}" class="bg-green-500 hover:bg-green-700 text-black font-bold py-2 px-4 rounded">Añadir nuevo estudiante</a>
-                                </div>
                                 <table class="border-collapse border-b border-gray-600 w-full h-full rounded-lg">
                                     <thead>
                                         <tr>
                                             <th class="border-b border-gray-600 px-4 py-2 text-center">DNI</th>
                                             <th class="border-b border-gray-600 px-4 py-2 text-center">Nombre</th>
                                             <th class="border-b border-gray-600 px-4 py-2 text-center">Apellido</th>
-                                            <th class="border-b border-gray-600 px-4 py-2 text-center">Nacimiento</th>
-                                            <th class="border-b border-gray-600 px-4 py-2 text-center">Porcentaje</th>
                                             <th class="border-b border-gray-600 px-4 py-2 text-center">Acción</th>
                                         </tr>
                                     </thead>
@@ -65,21 +60,10 @@
                                             <td class="border-b border-gray-600 px-4 py-2 text-center">{{ $student->dni }}</td>
                                             <td class="border-b border-gray-600 px-4 py-2 text-center">{{ $student->name }}</td>
                                             <td class="border-b border-gray-600 px-4 py-2 text-center">{{ $student->lastname }}</td>
-                                            <td class="border-b border-gray-600 px-4 py-2 text-center">{{ date('d-m-Y', strtotime($student->birthdate)) }}</td>
-                                            <td class="border-b border-gray-600 px-4 py-2 text-center">--</td>
                                             <td class="border-b border-gray-600 px-4 py-2 text-center">
-                                                <form action="{{ route('students.destroy', $student->id) }}" method="post">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <a href="{{ route('assists.instant', $student->id) }}" class="bg-green-500 hover:bg-green-700 text-black font-bold py-2 px-4 rounded">Presente</a>   
-                                                    
-                                                    <a href="{{ route('students.edit', $student->id) }}" class="bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded">Editar</a>   
-                                                    
-                                                    <a href="{{ route('students.show', $student->id) }}" class="bg-yellow-500 hover:bg-yellow-700 text-black font-bold py-2 px-4 rounded">Mostrar</a>
-                    
-
-                                                    <button type="submit" onclick="return confirm('¿Desea borrar el estudiante?');" class="bg-red-500 hover:bg-red-700 text-black font-bold py-2 px-4 rounded">Eliminar</button>
-                                                </form>
+                                                <a href="{{ route('assists.create', $student->id) }}" class="bg-yellow-500 hover:bg-yellow-700 text-black font-bold py-2 px-4 rounded">As. Tardía</a>
+                                                <a href="{{ route('assists.instant', $student->id) }}" class="bg-green-500 hover:bg-green-700 text-black font-bold py-2 px-4 rounded">Presente</a>
+                                                <a href="{{ route('assists.instant', $student->id) }}" class="bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded">Datos</a>
                                             </td>
                                         </tr>
                                         @empty

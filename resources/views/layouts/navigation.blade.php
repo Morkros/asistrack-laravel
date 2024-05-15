@@ -13,7 +13,17 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('students.index')" :active="request()->routeIs('students.index')">
-                        {{ __('Listado') }}
+                        {{ __('Alumnos') }}
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('assists.index')" :active="request()->routeIs('assists.index')">
+                        {{ __('Asistencias') }}
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('calendar')" :active="request()->routeIs('calendar')">
+                        {{ __('Calendario (no implementado)') }}
                     </x-nav-link>
                 </div>
             </div>
@@ -71,6 +81,7 @@
                 {{ __('Listado') }}
             </x-responsive-nav-link>
         </div>
+        
 
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">

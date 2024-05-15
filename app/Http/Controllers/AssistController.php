@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Assist;
+use App\Models\Student;
+use Illuminate\Http\Request;
 use App\Http\Requests\StoreAssistRequest;
 use App\Http\Requests\UpdateAssistRequest;
 
@@ -11,9 +13,20 @@ class AssistController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $searchTerm = $request->input('name_search');
+
+        $results = Student::where('name', 'like', '%' . $searchTerm . '%')
+        ->orWhere('lastname', 'like', '%' . $searchTerm . '%')
+        ->orWhereRaw("CONCAT(name, ' ', lastname) like ?", ['%' . $searchTerm . '%'])
+        ->get();
+
+        if ($results->isEmpty()) {
+            $results = Student::all();
+        }
+
+        return view('assists.index', ['results' => $results]);
     }
 
     /**
@@ -21,26 +34,39 @@ class AssistController extends Controller
      */
     public function create()
     {
-        //
+        return view('assists.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreAssistRequest $request)
+    public function store($id, $date)
     {
-        //
+        dd('totiao');
+        /* Assist::create(['student_id' => $id,
+                        'created_at' => $date]);
+        return redirect()->route('assists.index')
+                ->withSuccess('Asistencia añadida correctamente.'); */
+                
+    }
+
+    public function storeInstant($id)
+    {
+        Assist::create(['student_id' => $id]);
+        return redirect()->route('assists.index')
+                ->withSuccess('Asistencia añadida correctamente.');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Assist $assist,$dni)
+    public function show(Assist $assist, $dni)
     {
-        $assist = Assist::find($dni);
+        /* $assist = Assist::find($dni);
+        
         return view('assists.show', [
             'assist' => $assist
-        ]);
+        ]); */
     }
 
     /**
