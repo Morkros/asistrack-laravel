@@ -38,7 +38,10 @@ Route::middleware('auth')->group(function () {
     Route::resource('students', StudentController::class);
 
     Route::get('assist/{id}', [AssistController::class,"storeInstant"])->name('assists.instant');
+
     Route::get('assist', [AssistController::class,"index"])->name('assists.index');
+    Route::post('assist', [AssistController::class, 'getDni'])->name('assists.getDni');
+
     Route::get('assist/late/{id}', [AssistController::class,"create"])->name('assists.create');
 
     //muestra el calendario de asistencias

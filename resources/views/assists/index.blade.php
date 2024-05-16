@@ -16,7 +16,8 @@
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     <!--EMPIEZA EL DIV DE BUSCAR-->
                     <div class="text-center mt-5">
-                        <form action="{{ route('assists.index') }}" method="GET">
+                        <form action="{{ route('assists.getDni') }}" method="POST">
+                            @csrf
                             <div class="space-y-4">
                                 <input type="text" class="w-5/6 text-black font-bold rounded" id="dni_search" name="dni_search" placeholder="Buscar por dni">
                                 <br>
@@ -30,23 +31,36 @@
     </div>
 
 
+    @if ($message = Session::get('success'))
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 text-gray-900 dark:text-gray-100">
+                    <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
+                        <span class="block sm:inline">{{ $message }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif   
+
+    @if ($message = Session::get('error'))
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 text-gray-900 dark:text-gray-100">
+                    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                        <span class="block sm:inline">{{ $message }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
+        
     <!--EMPIEZA EL DIV DE AÑADIR ALUMNO-->
+    @if (isset($results))
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
 
-                    <div class="flex justify-center items-center mt-3">
-                        <div class="w-full">
-                            @if ($message = Session::get('success'))
-                                <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
-                                    <span class="block sm:inline">{{ $message }}</span>
-                                </div>
-                            @elseif ($message = Session::get('error'))
-                                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
-                                    <span class="block sm:inline">{{ $message }}</span>
-                                </div>
-                            @endif
-                        
                             <div class="rounded px-8 pt-6 pb-8 mb-4">
                                 <table class="border-collapse border-b border-gray-600 w-full h-full rounded-lg">
                                     <thead>
@@ -88,5 +102,6 @@
             </div>
         </div>    
     </div>
+    @endif
     
 </x-app-layout>

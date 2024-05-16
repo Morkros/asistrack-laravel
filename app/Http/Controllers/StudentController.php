@@ -11,29 +11,13 @@ use App\Http\Requests\UpdateStudentRequest;
 
 class StudentController extends Controller
 {
-/*     public function search(Request $request)
-    {
-        $searchTerm = $request->input('name_search');
-    
-        //$results = Student::where('name', 'like', '%' . $searchTerm . '%')->get();
-
-        $results = Student::where('name', 'like', '%' . $searchTerm . '%')
-        ->orWhere('lastname', 'like', '%' . $searchTerm . '%')
-        ->orWhereRaw("CONCAT(name, ' ', lastname) like ?", ['%' . $searchTerm . '%'])
-        ->get();
-
-        if ($results->isEmpty()) {
-            $results = Student::all();
-        }
-        return view('students.index', ['results' => $results]);
-    } */
 
     public function index(Request $request)
     {
        /*  $students = Student::all();
         //return $students;
         return view('students.index',['students' => $students]); */
-
+        //dd($request);
         $searchTerm = $request->input('name_search');
 
         $results = Student::where('name', 'like', '%' . $searchTerm . '%')

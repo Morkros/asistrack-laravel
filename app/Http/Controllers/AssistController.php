@@ -14,16 +14,20 @@ class AssistController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index()
+    {
+        return view('assists.index');
+    }
+
+    public function getDni(Request $request)
     {
         $search = $request->input('dni_search');
-        //dd($search);
         $results = Student::where('dni', '=' , $search)->get();
 
-            /* if ($results->isEmpty()) {
-                $results = Student::all();
-            } */
-    
+        if ($results->isEmpty()) {
+            return redirect()->route('assists.index')->withError('Estudiante no encontrado.');
+        }
+
         return view('assists.index', ['results' => $results]);
     }
 
@@ -52,11 +56,10 @@ class AssistController extends Controller
     {
         date_default_timezone_set('America/Argentina/Buenos_Aires');
         $date = date('Y-m-d');
-    
-        // Cambiar 'like' a '=' si 'student_id' es un campo numérico
+
         $exists = Assist::where('student_id', $id)
                         ->whereDate('created_at', $date)
-                        ->first(); // Usar 'first()' para obtener un solo registro
+                        ->first();
     
         if (!$exists) { 
             Assist::create(['student_id' => $id]);

@@ -1,1 +1,2 @@
--incluir un vinculo en la barra de navegación llamado "buscar" que lleve a una ventana que contenga un buscador por dni, que incluya el botón añadir asistencia.
+-incluir un vinculo en la barra de navegaciï¿½n llamado "buscar" que lleve a una ventana que contenga un buscador por dni, que incluya el botï¿½n aï¿½adir asistencia.
+-explicar en el readme como realizar la clonaciÃ³n, el deploy (como el del aÃ±o pasado)

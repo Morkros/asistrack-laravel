@@ -1,52 +1,43 @@
-@extends('layouts')
 
-@section('content')
-
-<div class="row justify-content-center mt-3">
-    <div class="col-md-8">
-
-        <div class="card">
-            <div class="card-header">
-                <div class="float-start">
-                    Información del estudiante
-                </div>
-                <div class="float-end">
-                    <a href="{{ route('students.index') }}" class="btn btn-primary btn-sm">&larr; Volver</a>
-                </div>
-            </div>
-            <div class="card-body">
-
-                    <div class="row">
-                        <label for="dni" class="col-md-4 col-form-label text-md-end text-start"><strong>Dni:</strong></label>
-                        <div class="col-md-6" style="line-height: 35px;">
-                            {{ $student->dni }}
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <label for="nombre" class="col-md-4 col-form-label text-md-end text-start"><strong>Nombre:</strong></label>
-                        <div class="col-md-6" style="line-height: 35px;">
-                            {{ $student->name }}
-                        </div>
-                    </div>
-                    
-                    <div class="row">
-                        <label for="apellido" class="col-md-4 col-form-label text-md-end text-start"><strong>Apellido:</strong></label>
-                        <div class="col-md-6" style="line-height: 35px;">
-                            {{ $student->lastname }}
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <label for="nacimiento" class="col-md-4 col-form-label text-md-end text-start"><strong>nacimiento:</strong></label>
-                        <div class="col-md-6" style="line-height: 35px;">
-                            {{ $student->birthdate }}
-                        </div>
-                    </div>
-        
-            </div>
-        </div>
-    </div>    
-</div>
+<x-app-layout>
     
-@endsection
+    <x-slot name="header">
+        <div class="flex items-center">
+            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+                {{ __('Información del estudiante') }}
+            </h2>
+            <x-user-icon class="h-5 w-auto fill-current text-gray-800 dark:text-gray-200 ml-2"></x-user-icon>
+        </div>
+    </x-slot>
+ 
+    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 py-12">
+        <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="p-6 text-gray-900 dark:text-gray-100">
+
+                <a href="{{ route('students.index') }}" class="bg-blue-500 hover:bg-blue-700 text-black font-bold py-0.5 px-2 rounded">&larr; Volver</a>
+                
+                <div class="rounded px-8 pt-6 pb-8 mb-4">
+                    <table class="w-full h-full rounded-lg">
+                        <thead>
+                            <tr>
+                                <th class="border-b border-gray-600 px-4 py-2 text-center">DNI</th>
+                                <th class="border-b border-gray-600 px-4 py-2 text-center">Nombre</th>
+                                <th class="border-b border-gray-600 px-4 py-2 text-center">Apellido</th>
+                                <th class="border-b border-gray-600 px-4 py-2 text-center">Nacimiento</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class=" px-4 py-2 text-center">{{ $student->dni }}</td>
+                                <td class=" px-4 py-2 text-center">{{ $student->name }}</td>
+                                <td class=" px-4 py-2 text-center">{{ $student->lastname }}</td>
+                                <td class=" px-4 py-2 text-center">{{ $student->birthdate }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>                    
+        </div>
+    </div>   
+
+</x-app-layout>
