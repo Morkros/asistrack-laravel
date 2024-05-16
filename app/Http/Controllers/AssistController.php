@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Assist;
 use App\Models\Student;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests\StoreAssistRequest;
 use App\Http\Requests\UpdateAssistRequest;
 
@@ -15,17 +16,14 @@ class AssistController extends Controller
      */
     public function index(Request $request)
     {
-        $searchTerm = $request->input('name_search');
+        $search = $request->input('dni_search');
+        //dd($search);
+        $results = Student::where('dni', '=' , $search)->get();
 
-        $results = Student::where('name', 'like', '%' . $searchTerm . '%')
-        ->orWhere('lastname', 'like', '%' . $searchTerm . '%')
-        ->orWhereRaw("CONCAT(name, ' ', lastname) like ?", ['%' . $searchTerm . '%'])
-        ->get();
-
-        if ($results->isEmpty()) {
-            $results = Student::all();
-        }
-
+            /* if ($results->isEmpty()) {
+                $results = Student::all();
+            } */
+    
         return view('assists.index', ['results' => $results]);
     }
 
@@ -49,21 +47,24 @@ class AssistController extends Controller
                 ->withSuccess('Asistencia añadida correctamente.'); */
                 
     }
-
+    
     public function storeInstant($id)
     {
         date_default_timezone_set('America/Argentina/Buenos_Aires');
         $date = date('Y-m-d');
-        $exists = Assist::where('student_id', 'like', $id)->whereDate('created_at', $date)->get();
-        dd($exists);
-        if ($exists->isEmpty()) { 
+    
+        // Cambiar 'like' a '=' si 'student_id' es un campo numérico
+        $exists = Assist::where('student_id', $id)
+                        ->whereDate('created_at', $date)
+                        ->first(); // Usar 'first()' para obtener un solo registro
+    
+        if (!$exists) { 
             Assist::create(['student_id' => $id]);
             return redirect()->route('assists.index')->withSuccess('Asistencia añadida correctamente.');
         } else {
             return redirect()->route('assists.index')->withError('Asistencia ya existente.');
         }
     }
-
     /**
      * Display the specified resource.
      */

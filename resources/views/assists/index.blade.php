@@ -4,7 +4,7 @@
 <x-slot name="header">
         <div class="flex items-center">
             <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-                {{ __('Listado para añadir asistencias') }}
+                {{ __('Buscador para añadir asistencias') }}
             </h2>
             <x-user-icon class="h-5 w-auto fill-current text-gray-800 dark:text-gray-200 ml-2"></x-user-icon>
         </div>
@@ -18,7 +18,7 @@
                     <div class="text-center mt-5">
                         <form action="{{ route('assists.index') }}" method="GET">
                             <div class="space-y-4">
-                                <input type="text" class="w-5/6 text-black font-bold rounded" id="name_search" name="name_search" placeholder="Buscar por nombre">
+                                <input type="text" class="w-5/6 text-black font-bold rounded" id="dni_search" name="dni_search" placeholder="Buscar por dni">
                                 <br>
                                 <button type="submit" class=" bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded">Buscar</button>
                             </div>
@@ -30,12 +30,11 @@
     </div>
 
 
+    <!--EMPIEZA EL DIV DE AÑADIR ALUMNO-->
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
 
-
-<!--EMPIEZA EL DIV DE AÑADIR ALUMNO-->
                     <div class="flex justify-center items-center mt-3">
                         <div class="w-full">
                             @if ($message = Session::get('success'))
@@ -84,13 +83,10 @@
                             </div>
                         </div>
                     </div>                    
-                    
-                                </div>
-                            </div>
-                        </div>    
-                    </div>
+         
                 </div>
             </div>
-        </div>
+        </div>    
+    </div>
     
 </x-app-layout>
