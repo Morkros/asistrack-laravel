@@ -30,7 +30,7 @@ class AssistController extends Controller
 
         return view('assists.index', ['results' => $results]);
     }
-
+    
     /**
      * Show the form for creating a new resource.
      */

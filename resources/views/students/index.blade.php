@@ -72,12 +72,12 @@
                                                     @csrf
                                                     @method('DELETE')
                                                     
-                                                    <a href="{{ route('students.edit', $student->id) }}" class="bg-yellow-500 hover:bg-yellow-700 text-black font-bold py-2 px-4 rounded">Editar</a>   
+                                                    <a href="{{ route('students.edit', $student->id) }}" class="bg-yellow-500 hover:bg-yellow-700 text-black font-bold py-2 px-3 rounded">Editar</a>   
                                                     
-                                                    <a href="{{ route('students.show', $student->id) }}" class="bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded">Mostrar</a>
+                                                    <a href="{{ route('students.show', $student->id) }}" class="bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-3 rounded">Mostrar</a>
                     
 
-                                                    <button type="submit" onclick="return confirm('¿Desea borrar el estudiante?');" class="bg-red-500 hover:bg-red-700 text-black font-bold py-2 px-4 rounded">Eliminar</button>
+                                                    <button type="submit" onclick="return confirm('¿Desea borrar el estudiante?');" class="bg-red-500 hover:bg-red-700 text-black font-bold py-1.5 px-3 rounded">Eliminar</button>
                                                 </form>
                                             </td>
                                         </tr>

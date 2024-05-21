@@ -1,39 +1,87 @@
 <section>
     <header>
         <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-            {{ __('Update Password') }}
+            {{ __('Editar parámetros') }}
         </h2>
 
         <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
-            {{ __('Ensure your account is using a long, random password to stay secure.') }}
+            {{ __('Estos parámetros definen el porcentaje de asistencia del alumno.') }}
         </p>
     </header>
-
-    <form method="post" action="{{ route('password.update') }}" class="mt-6 space-y-6">
+         
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <strong>Whoops!</strong> Hay algunos errores en los datos introducidos.<br><br>
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+         
+    @if (isset($parameter))
+        <form action="{{ route('parameter.update', $parameter->id) }}" class="mt-6 space-y-6" method="POST" enctype="multipart/form-data">
+        @method('PUT')
+    @else
+        <form action="{{ route('parameter.store') }}" class="mt-6 space-y-6" method="POST" enctype="multipart/form-data">
+    @endif
         @csrf
-        @method('put')
-
+        
         <div>
-            <x-input-label for="update_password_current_password" :value="__('Current Password')" />
-            <x-text-input id="update_password_current_password" name="current_password" type="password" class="mt-1 block w-full" autocomplete="current-password" />
-            <x-input-error :messages="$errors->updatePassword->get('current_password')" class="mt-2" />
+            <x-input-label for="total_class_days" :value="__('Total de días de clase:')" />
+            <x-text-input id="total_class_days" name="total_class_days" type="number" class="mt-1 block w-full"/>
         </div>
 
         <div>
-            <x-input-label for="update_password_password" :value="__('New Password')" />
-            <x-text-input id="update_password_password" name="password" type="password" class="mt-1 block w-full" autocomplete="new-password" />
-            <x-input-error :messages="$errors->updatePassword->get('password')" class="mt-2" />
+            <x-input-label for="regular" :value="__('Porcentaje para regularidad:')" />
+            <x-text-input id="regular" name="regular" type="number" class="mt-1 block w-full"/>
         </div>
 
         <div>
-            <x-input-label for="update_password_password_confirmation" :value="__('Confirm Password')" />
-            <x-text-input id="update_password_password_confirmation" name="password_confirmation" type="password" class="mt-1 block w-full" autocomplete="new-password" />
-            <x-input-error :messages="$errors->updatePassword->get('password_confirmation')" class="mt-2" />
+            <x-input-label for="promotion" :value="__('Porcentaje para promocionar:')" />
+            <x-text-input id="promotion" name="promotion" type="number" class="mt-1 block w-full"/>
         </div>
 
         <div class="flex items-center gap-4">
-            <x-primary-button>{{ __('Save') }}</x-primary-button>
+            <x-primary-button>{{ __('Actualizar') }}</x-primary-button>
 
+            @if (session('status') === 'success')
+                <p
+                    x-data="{ show: true }"
+                    x-show="show"
+                    x-transition
+                    x-init="setTimeout(() => show = false, 2000)"
+                    class="text-sm text-gray-600 dark:text-gray-400"
+                >{{ __('Actualizado') }}</p>
+            @endif
+        </div>
+
+        {{--  <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>Total de días de clase:</strong>
+                    <input type="number" name="class_days" class="form-control" value="{{ old('total_class_days', $parameter->total_class_days ?? '') }}"  placeholder="185 días de clase">
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>Porcentaje para promocionar:</strong>
+                    <input type="number" name="promotion" class="form-control" name="promotion" value="{{ old('promotion', $parameter->promotion ?? '') }}" placeholder="80% para promocionar">
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>Porcentaje para regularizar:</strong>
+                    <input type="number" name="regular" class="form-control" name="regular" value="{{ old('regular', $parameter->regular ?? '') }}" placeholder="70% para regularizar">
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-3 rounded">Actualizar</button>
+                
             @if (session('status') === 'password-updated')
                 <p
                     x-data="{ show: true }"
@@ -41,59 +89,10 @@
                     x-transition
                     x-init="setTimeout(() => show = false, 2000)"
                     class="text-sm text-gray-600 dark:text-gray-400"
-                >{{ __('Saved.') }}</p>
+                >{{ __('Guardado') }}</p>
             @endif
-        </div>
+            </div>
+        </div> --}}
+         
     </form>
 </section>
-
-
-{{-- <div class="row">
-    <div class="col-lg-12 margin-tb">
-        <div class="pull-left">
-            <h2>@if (isset($product)) Edit @else Add @endif Product</h2>
-        </div>
-        <div class="pull-right">
-            <a class="btn btn-primary" href="{{ route('products.index') }}"> Back</a>
-        </div>
-    </div>
-</div>
-     
-@if ($errors->any())
-    <div class="alert alert-danger">
-        <strong>Whoops!</strong> There were some problems with your input.<br><br>
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
-     
-@if (isset($product))
-    <form action="{{ route('products.update', $product->id) }}" method="POST" enctype="multipart/form-data">
-    @method('PUT')
-@else
-    <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
-@endif
-    @csrf
-    
-     <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Name:</strong>
-                <input type="text" name="name" value="{{ old('name', $product->name ?? '') }}" class="form-control" placeholder="Name">
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Detail:</strong>
-                <textarea class="form-control" style="height:150px" name="detail" placeholder="Detail">{{ old('detail', $product->detail ?? '') }}</textarea>
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </div>
-    </div>
-     
-</form> --}}

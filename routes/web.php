@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ParameterController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\AssistController;
@@ -43,6 +44,9 @@ Route::middleware('auth')->group(function () {
     Route::post('assist', [AssistController::class, 'getDni'])->name('assists.getDni');
 
     Route::get('assist/late/{id}', [AssistController::class,"create"])->name('assists.create');
+    
+    Route::post('products', [ParameterController::class, 'store'])->name('parameter.store');
+    Route::put('products/{id}', [ParameterController::class, 'update'])->name('parameter.update');
 
     //muestra el calendario de asistencias
     Route::get('/calendar', function () {

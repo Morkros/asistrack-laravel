@@ -31,14 +31,16 @@ class ParameterController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request) 
+    public function store(Request $request): RedirectResponse
     {
-        Parameter::create($request->all());
-       
-        return redirect()->route('products.index')
-                        ->with('success','Product created successfully.');
-    }
 
+        $input = $request->all();
+      
+        Parameter::create($input);
+       
+        return back()->with('status', 'success');
+    }
+  
     /**
      * Display the specified resource.
      */
@@ -50,9 +52,11 @@ class ParameterController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        
+        $product = Parameter::find($id);
+        compact($product);
+        return back()->with('status', 'success');
     }
 
     /**
