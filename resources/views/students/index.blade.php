@@ -43,7 +43,15 @@
                                     <span class="block sm:inline">{{ $message }}</span>
                                 </div>
                             @endif
-                        
+                            @isset($birthdays)
+                            <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
+                                <h4>Hoy es el cumpleaños de: </h4>
+                                @foreach ($birthdays as $birthday)
+                                    <span class="block sm:inline">🎈 {{ $birthday->name }} {{ $birthday->lastname }}</span><br>
+                                @endforeach
+                            </div>
+                            @endisset
+                                                
                             <div class="rounded px-8 pt-6 pb-8 mb-4">
                                 <div class="mb-4">
                                     <a href="{{ route('students.create') }}" class="bg-green-500 hover:bg-green-700 text-black font-bold py-2 px-4 rounded">Añadir nuevo estudiante</a>
@@ -61,28 +69,6 @@
                                     </thead>
                                     <tbody>
                                         @forelse ($results as $student)
-                                            @if (date('d-m', strtotime($student->birthdate)) === date('d-m'))
-                                                <tr>
-                                                    <td class="bg-green-600 border-b border-gray-600 px-4 py-2 text-black text-center">&#x1F388; {{ $student->dni }}</td>
-                                                    <td class="bg-green-600 border-b border-gray-600 px-4 py-2 text-black text-center">{{ $student->name }}</td>
-                                                    <td class="bg-green-600 border-b border-gray-600 px-4 py-2 text-black text-center">{{ $student->lastname }}</td>
-                                                    <td class="bg-green-600 border-b border-gray-600 px-4 py-2 text-black text-center">{{ date('d-m-Y', strtotime($student->birthdate)) }}</td>
-                                                    <td class="bg-green-600 border-b border-gray-600 px-4 py-2 text-black text-center">--</td>
-                                                    <td class="bg-green-600 border-b border-gray-600 px-4 py-2 text-black text-center">
-                                                        <form action="{{ route('students.destroy', $student->id) }}" method="post">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            
-                                                            <a href="{{ route('students.edit', $student->id) }}" class="bg-yellow-500 hover:bg-yellow-700 text-black font-bold py-2 px-3 rounded">Editar</a>   
-                                                            
-                                                            <a href="{{ route('students.show', $student->id) }}" class="bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-3 rounded">Mostrar</a>
-                            
-
-                                                            <button type="submit" onclick="return confirm('¿Desea borrar el estudiante?');" class="bg-red-500 hover:bg-red-700 text-black font-bold py-1.5 px-3 rounded">Eliminar</button>
-                                                        </form>
-                                                    </td>
-                                                </tr>
-                                            @else
                                                 <tr>
                                                     <td class="border-b border-gray-600 px-4 py-2 text-center">{{ $student->dni }}</td>
                                                     <td class="border-b border-gray-600 px-4 py-2 text-center">{{ $student->name }}</td>
@@ -103,7 +89,6 @@
                                                         </form>
                                                     </td>
                                                 </tr>
-                                            @endif
                                         @empty
                                         <tr>
                                             <td colspan="6">
