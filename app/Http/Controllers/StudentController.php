@@ -14,10 +14,6 @@ class StudentController extends Controller
 
     public function index(Request $request)
     {
-       /*  $students = Student::all();
-        //return $students;
-        return view('students.index',['students' => $students]); */
-        //dd($request);
         $searchTerm = $request->input('name_search');
 
         $results = Student::where('name', 'like', '%' . $searchTerm . '%')
@@ -60,6 +56,7 @@ class StudentController extends Controller
 
     public function update(UpdateStudentRequest $request, Student $student) : RedirectResponse
     {
+        dd($request->all());
         $student->update($request->all());
         return redirect()->back()
                 ->withSuccess('Estudiante actualizado correctamente.');

@@ -61,26 +61,49 @@
                                     </thead>
                                     <tbody>
                                         @forelse ($results as $student)
-                                        <tr>
-                                            <td class="border-b border-gray-600 px-4 py-2 text-center">{{ $student->dni }}</td>
-                                            <td class="border-b border-gray-600 px-4 py-2 text-center">{{ $student->name }}</td>
-                                            <td class="border-b border-gray-600 px-4 py-2 text-center">{{ $student->lastname }}</td>
-                                            <td class="border-b border-gray-600 px-4 py-2 text-center">{{ date('d-m-Y', strtotime($student->birthdate)) }}</td>
-                                            <td class="border-b border-gray-600 px-4 py-2 text-center">--</td>
-                                            <td class="border-b border-gray-600 px-4 py-2 text-center">
-                                                <form action="{{ route('students.destroy', $student->id) }}" method="post">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    
-                                                    <a href="{{ route('students.edit', $student->id) }}" class="bg-yellow-500 hover:bg-yellow-700 text-black font-bold py-2 px-3 rounded">Editar</a>   
-                                                    
-                                                    <a href="{{ route('students.show', $student->id) }}" class="bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-3 rounded">Mostrar</a>
-                    
+                                            @if (date('d-m', strtotime($student->birthdate)) === date('d-m'))
+                                                <tr>
+                                                    <td class="bg-green-200 border-b border-green-600 px-4 py-2 text-center">{{ $student->dni }}</td>
+                                                    <td class="bg-green-200 border-b border-green-600 px-4 py-2 text-center">{{ $student->name }}</td>
+                                                    <td class="bg-green-200 border-b border-green-600 px-4 py-2 text-center">{{ $student->lastname }}</td>
+                                                    <td class="bg-green-200 border-b border-green-600 px-4 py-2 text-center">{{ date('d-m-Y', strtotime($student->birthdate)) }}</td>
+                                                    <td class="bg-green-200 border-b border-green-600 px-4 py-2 text-center">--</td>
+                                                    <td class="bg-green-200 border-b border-green-600 px-4 py-2 text-center">
+                                                        <form action="{{ route('students.destroy', $student->id) }}" method="post">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            
+                                                            <a href="{{ route('students.edit', $student->id) }}" class="bg-yellow-500 hover:bg-yellow-700 text-black font-bold py-2 px-3 rounded">Editar</a>   
+                                                            
+                                                            <a href="{{ route('students.show', $student->id) }}" class="bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-3 rounded">Mostrar</a>
+                            
 
-                                                    <button type="submit" onclick="return confirm('¿Desea borrar el estudiante?');" class="bg-red-500 hover:bg-red-700 text-black font-bold py-1.5 px-3 rounded">Eliminar</button>
-                                                </form>
-                                            </td>
-                                        </tr>
+                                                            <button type="submit" onclick="return confirm('¿Desea borrar el estudiante?');" class="bg-red-500 hover:bg-red-700 text-black font-bold py-1.5 px-3 rounded">Eliminar</button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            @else
+                                                <tr>
+                                                    <td class="border-b border-gray-600 px-4 py-2 text-center">{{ $student->dni }}</td>
+                                                    <td class="border-b border-gray-600 px-4 py-2 text-center">{{ $student->name }}</td>
+                                                    <td class="border-b border-gray-600 px-4 py-2 text-center">{{ $student->lastname }}</td>
+                                                    <td class="border-b border-gray-600 px-4 py-2 text-center">{{ date('d-m-Y', strtotime($student->birthdate)) }}</td>
+                                                    <td class="border-b border-gray-600 px-4 py-2 text-center">--</td>
+                                                    <td class="border-b border-gray-600 px-4 py-2 text-center">
+                                                        <form action="{{ route('students.destroy', $student->id) }}" method="post">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            
+                                                            <a href="{{ route('students.edit', $student->id) }}" class="bg-yellow-500 hover:bg-yellow-700 text-black font-bold py-2 px-3 rounded">Editar</a>   
+                                                            
+                                                            <a href="{{ route('students.show', $student->id) }}" class="bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-3 rounded">Mostrar</a>
+                            
+
+                                                            <button type="submit" onclick="return confirm('¿Desea borrar el estudiante?');" class="bg-red-500 hover:bg-red-700 text-black font-bold py-1.5 px-3 rounded">Eliminar</button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            @endif
                                         @empty
                                         <tr>
                                             <td colspan="6">

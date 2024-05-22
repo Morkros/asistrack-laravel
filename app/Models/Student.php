@@ -16,7 +16,7 @@ class Student extends Model
         'dni',
         'name',
         'lastname',
-        'birthdate'
+        'birthdate',
     ];
 
     public function assist(){

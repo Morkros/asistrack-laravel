@@ -37,6 +37,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     
     Route::resource('students', StudentController::class);
+    //Route::put('/students/{student}', [StudentController::class, 'update'])->name('students.update');
 
     Route::get('assist/{id}', [AssistController::class,"storeInstant"])->name('assists.instant');
 
@@ -45,8 +46,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('assist/late/{id}', [AssistController::class,"create"])->name('assists.create');
     
-    Route::post('products', [ParameterController::class, 'store'])->name('parameter.store');
-    Route::put('products/{id}', [ParameterController::class, 'update'])->name('parameter.update');
+    Route::post('parameter', [ParameterController::class, 'store'])->name('parameter.store');
+    Route::put('parameter/{id}', [ParameterController::class, 'update'])->name('parameter.update');
 
     //muestra el calendario de asistencias
     Route::get('/calendar', function () {
