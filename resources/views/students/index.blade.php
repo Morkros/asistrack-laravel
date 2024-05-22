@@ -63,12 +63,12 @@
                                         @forelse ($results as $student)
                                             @if (date('d-m', strtotime($student->birthdate)) === date('d-m'))
                                                 <tr>
-                                                    <td class="bg-green-200 border-b border-green-600 px-4 py-2 text-center">{{ $student->dni }}</td>
-                                                    <td class="bg-green-200 border-b border-green-600 px-4 py-2 text-center">{{ $student->name }}</td>
-                                                    <td class="bg-green-200 border-b border-green-600 px-4 py-2 text-center">{{ $student->lastname }}</td>
-                                                    <td class="bg-green-200 border-b border-green-600 px-4 py-2 text-center">{{ date('d-m-Y', strtotime($student->birthdate)) }}</td>
-                                                    <td class="bg-green-200 border-b border-green-600 px-4 py-2 text-center">--</td>
-                                                    <td class="bg-green-200 border-b border-green-600 px-4 py-2 text-center">
+                                                    <td class="bg-green-600 border-b border-gray-600 px-4 py-2 text-black text-center">&#x1F388; {{ $student->dni }}</td>
+                                                    <td class="bg-green-600 border-b border-gray-600 px-4 py-2 text-black text-center">{{ $student->name }}</td>
+                                                    <td class="bg-green-600 border-b border-gray-600 px-4 py-2 text-black text-center">{{ $student->lastname }}</td>
+                                                    <td class="bg-green-600 border-b border-gray-600 px-4 py-2 text-black text-center">{{ date('d-m-Y', strtotime($student->birthdate)) }}</td>
+                                                    <td class="bg-green-600 border-b border-gray-600 px-4 py-2 text-black text-center">--</td>
+                                                    <td class="bg-green-600 border-b border-gray-600 px-4 py-2 text-black text-center">
                                                         <form action="{{ route('students.destroy', $student->id) }}" method="post">
                                                             @csrf
                                                             @method('DELETE')

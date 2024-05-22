@@ -22,8 +22,8 @@ class UpdateStudentRequest extends FormRequest
     public function rules(): array
     {
         return [
-                'id' => 'required|numeric|digits:8|unique:students,id,'.$this->student->id,
-                'dni' => 'required|numeric',
+                'id' => 'required|numeric|unique:students,id,'.$this->student->id,
+                'dni' => 'required|digits:8|numeric',
                 'name' => 'required|string|max:30',
                 'lastname' => 'required|string|max:30',
                 'birthdate' => 'required'

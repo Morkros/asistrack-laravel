@@ -56,7 +56,6 @@ class StudentController extends Controller
 
     public function update(UpdateStudentRequest $request, Student $student) : RedirectResponse
     {
-        dd($request->all());
         $student->update($request->all());
         return redirect()->back()
                 ->withSuccess('Estudiante actualizado correctamente.');

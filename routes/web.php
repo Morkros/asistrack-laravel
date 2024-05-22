@@ -37,7 +37,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     
     Route::resource('students', StudentController::class);
-    //Route::put('/students/{student}', [StudentController::class, 'update'])->name('students.update');
 
     Route::get('assist/{id}', [AssistController::class,"storeInstant"])->name('assists.instant');
 

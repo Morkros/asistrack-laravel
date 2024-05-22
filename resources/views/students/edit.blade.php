@@ -24,6 +24,8 @@
                             @csrf
                             @method('PUT')
 
+                            <input type="hidden" name="id" value="{{ $students->id }}">
+
                             <div class="mb-4">
                                 <label for="dni" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Dni</label>
                                 <input type="number" class="text-black mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 form-control @error('dni') is-invalid @enderror" id="dni" name="dni" value="{{ $students->dni }}">
