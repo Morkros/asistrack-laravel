@@ -27,10 +27,7 @@ class StudentController extends Controller
             $results = Student::all();
         }
 
-        $results = Student::all();
-
         $birthday = $this->birthday();
-      //dd($birthday);
 
         return view('students.index', ['results' => $results, 'birthdays' => $birthday]);
     }
@@ -88,4 +85,9 @@ class StudentController extends Controller
         return $birthdayboyos;
     }
     
+    //instanciando una función de otra clase
+/*     public function assistancePercentage() {
+        $parameter = new ParameterController();
+        return $parameter->assistPercent();
+    } */
 }

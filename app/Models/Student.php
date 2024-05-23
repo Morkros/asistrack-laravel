@@ -26,4 +26,16 @@ class Student extends Model
     public function grade(){
         return $this -> hasOne(Grade::class);
     }
+
+    public function percentage () {
+        $parameter = Parameter::find(1)->get();
+        $classDays = $parameter[0]->total_class_days;
+        $perRegular = $parameter[0]->regular;
+        $perProm = $parameter[0]->promotion;
+
+        
+
+       //dd($classDays, $perRegular, $perProm);
+        return 60;
+    }
 }

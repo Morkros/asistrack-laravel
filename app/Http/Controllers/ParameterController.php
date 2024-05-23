@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Student;
+use App\Models\Assists;
+use Illuminate\Support\Facades\DB;
 use App\Models\Parameter;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -62,10 +64,16 @@ class ParameterController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Parameter $parameter)
+    public function update(Request $request)
     {
         // Actualiza el objeto con los datos del request
-        $parameter->update($request->all());
+        DB::table('parameters')
+              ->where('id', $request->id)
+              ->update([
+                'total_class_days' => $request->total_class_days,
+                'promotion' => $request->promotion,
+                'regular' => $request->regular
+                ]);
     
         // Redirige de vuelta con un mensaje de éxito
         return redirect()->back()
@@ -80,4 +88,20 @@ class ParameterController extends Controller
     {
         //
     }
+
+    /* public function assistPercent () {
+        $students = DB::select('select id, dni from students');
+
+        $totalAssistance = [];
+        foreach ($students as $student) {
+            $totalAssists = DB::table('assists')
+            ->where('student_id', $student->id)
+            ->count();
+            
+           $totalAssist = $totalAssist->count();
+            $totalAssistCount[] = $totalAssist;
+        }
+        dd($totalAssists);
+        return $totalAssistCount;
+    } */
 }

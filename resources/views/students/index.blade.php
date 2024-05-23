@@ -83,7 +83,8 @@
                                                 {{ $student->lastname }}</td>
                                             <td class="border-b border-gray-600 px-4 py-2 text-center">
                                                 {{ date('d-m-Y', strtotime($student->birthdate)) }}</td>
-                                            <td class="border-b border-gray-600 px-4 py-2 text-center">--</td>
+                                            <td class="border-b border-gray-600 px-4 py-2 text-center">
+                                                {{$student->percentage() }}</td>
                                             <td class="border-b border-gray-600 px-4 py-2 text-center">
                                                 <form action="{{ route('students.destroy', $student->id) }}"
                                                     method="post">

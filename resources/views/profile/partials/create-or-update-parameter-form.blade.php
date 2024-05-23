@@ -20,10 +20,11 @@
         </div>
     @endif
          
-    @dd($parameter[0]->id)
     @if (!empty($parameter))
         <form action="{{ route('parameter.update', $parameter[0]->id) }}" class="mt-6 space-y-6" method="POST" enctype="multipart/form-data">
         @method('PUT')
+
+        <input type="hidden" name="id" value="{{ $parameter[0]->id }}">
     @else
         <form action="{{ route('parameter.store') }}" class="mt-6 space-y-6" method="POST" enctype="multipart/form-data">
     @endif
@@ -35,13 +36,13 @@
         </div>
 
         <div>
-            <x-input-label for="regular" :value="__('Porcentaje para regularidad:')" />
-            <x-text-input id="regular" name="regular" type="number" class="mt-1 block w-full"/>
+            <x-input-label for="promotion" :value="__('Porcentaje para promocionar:')" />
+            <x-text-input id="promotion" name="promotion" type="number" class="mt-1 block w-full"/>
         </div>
 
         <div>
-            <x-input-label for="promotion" :value="__('Porcentaje para promocionar:')" />
-            <x-text-input id="promotion" name="promotion" type="number" class="mt-1 block w-full"/>
+            <x-input-label for="regular" :value="__('Porcentaje para regularidad:')" />
+            <x-text-input id="regular" name="regular" type="number" class="mt-1 block w-full"/>
         </div>
 
         <div class="flex items-center gap-4">

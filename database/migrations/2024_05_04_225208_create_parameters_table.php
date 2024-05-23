@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('parameters', function (Blueprint $table) {
             $table->id();
-            $table->integer('total_class_days')->nullable();
-            $table->integer('promotion')->nullable();
-            $table->integer('regular')->nullable();
+            $table->integer('total_class_days');
+            $table->integer('promotion');
+            $table->integer('regular');
             $table->timestamps();
         });
     }
