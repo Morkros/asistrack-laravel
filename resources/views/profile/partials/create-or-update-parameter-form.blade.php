@@ -20,7 +20,7 @@
         </div>
     @endif
          
-    {{-- @dd($parameter) --}}
+    @dd($parameter[0]->id)
     @if (!empty($parameter))
         <form action="{{ route('parameter.update', $parameter[0]->id) }}" class="mt-6 space-y-6" method="POST" enctype="multipart/form-data">
         @method('PUT')

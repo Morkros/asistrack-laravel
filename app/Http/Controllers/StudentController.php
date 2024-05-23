@@ -27,10 +27,10 @@ class StudentController extends Controller
             $results = Student::all();
         }
 
-        //$results = Student::all();
+        $results = Student::all();
 
-        $birthday = $this->birthday(Student::all());
-      //  dd($birthday);
+        $birthday = $this->birthday();
+      //dd($birthday);
 
         return view('students.index', ['results' => $results, 'birthdays' => $birthday]);
     }
@@ -75,10 +75,9 @@ class StudentController extends Controller
                 ->withSuccess('Estudiante eliminado correctamente.');
     }
 
-    public function birthday($students) {
+    public function birthday() {
         $today = Carbon::now()->format('d-m');
-    
-        //$students = DB::select('select name, lastname, birthdate from students');
+        $students = DB::select('select name, lastname, birthdate from students');
         $birthdayboyos = [];
         foreach ($students as $student) {
             $birthday = Carbon::parse($student->birthdate)->format('d-m');

@@ -62,12 +62,16 @@ class ParameterController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Parameter $id)
+    public function update(Request $request, Parameter $parameter)
     {
+        // Actualiza el objeto con los datos del request
         $parameter->update($request->all());
+    
+        // Redirige de vuelta con un mensaje de éxito
         return redirect()->back()
                 ->withSuccess('Estudiante actualizado correctamente.');
     }
+    
 
     /**
      * Remove the specified resource from storage.
