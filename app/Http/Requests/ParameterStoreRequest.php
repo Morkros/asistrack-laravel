@@ -22,9 +22,9 @@ class ParameterStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'total_class_days' => 'numeric|digits_between:1,3',
-            'promotion' => 'numeric|digits_between:1,3',
-            'regular' => 'numeric|digits_between:1,3'
+            'total_class_days' => 'numeric|required|digits_between:1,3',
+            'promotion' => 'numeric|required|digits_between:1,3',
+            'regular' => 'numeric|required|digits_between:1,3'
         ];
     }
 }

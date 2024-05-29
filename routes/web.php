@@ -1,11 +1,11 @@
 <?php
 
-use App\Http\Controllers\ParameterController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\StudentController;
-use App\Http\Controllers\AssistController;
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+//use app\Http\Controllers\GeneratePDFController;
+use App\Http\Controllers\AssistController;
+use App\Http\Controllers\StudentController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ParameterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,15 +38,20 @@ Route::middleware('auth')->group(function () {
     
     Route::resource('students', StudentController::class);
 
-    Route::get('assist/{id}', [AssistController::class,"storeInstant"])->name('assists.instant');
-
     Route::get('assist', [AssistController::class,"index"])->name('assists.index');
     Route::post('assist', [AssistController::class, 'getDni'])->name('assists.getDni');
+    Route::post('assist/{id}', [AssistController::class,"storeInstant"])->name('assists.instant');
+    Route::get('assist/show/{id}', [AssistController::class, "show"])->name('assists.show');
 
-    Route::get('assist/late/{id}', [AssistController::class,"create"])->name('assists.create');
+    Route::post('calendar', [AssistController::class,"getDate"])->name('assists.getDate');
     
     Route::post('parameter', [ParameterController::class, 'store'])->name('parameter.store');
     Route::put('parameter/{id}', [ParameterController::class, 'update'])->name('parameter.update');
+
+    Route::get('parameter', [ParameterController::class, 'generatePDF'])->name('pdf.generatePDF');
+    Route::post('/export/students', [ParameterController::class, 'exportStudents'])->name('export.students');
+
+    //Route::get('pdf', [app\Http\Controllers\GeneratePDFController::class, 'generatePDF'])->name('pdf.generatePDF');
 
     //muestra el calendario de asistencias
     Route::get('/calendar', function () {

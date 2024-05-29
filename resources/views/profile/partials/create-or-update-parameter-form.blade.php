@@ -32,17 +32,17 @@
         
         <div>
             <x-input-label for="total_class_days" :value="__('Total de días de clase:')" />
-            <x-text-input id="total_class_days" name="total_class_days" type="number" class="mt-1 block w-full"/>
+            <x-text-input id="total_class_days" name="total_class_days" type="number" class="mt-1 block w-full" required/>
         </div>
 
         <div>
             <x-input-label for="promotion" :value="__('Porcentaje para promocionar:')" />
-            <x-text-input id="promotion" name="promotion" type="number" class="mt-1 block w-full"/>
+            <x-text-input id="promotion" name="promotion" type="number" class="mt-1 block w-full" required/>
         </div>
 
         <div>
             <x-input-label for="regular" :value="__('Porcentaje para regularidad:')" />
-            <x-text-input id="regular" name="regular" type="number" class="mt-1 block w-full"/>
+            <x-text-input id="regular" name="regular" type="number" class="mt-1 block w-full" required/>
         </div>
 
         <div class="flex items-center gap-4">

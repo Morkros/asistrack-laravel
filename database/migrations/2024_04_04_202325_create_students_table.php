@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('name', 30);
             $table->string('lastname', 30);
             $table->date('birthdate');
+            $table->enum('grade',['1ro','2do','3ro']);
             $table->timestamps();
         });
     }

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Student;
-use Illuminate\Http\Request;
-use Illuminate\View\View;
 use Carbon\Carbon;
+use App\Models\Student;
+use Illuminate\View\View;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\StoreStudentRequest;
@@ -19,9 +19,9 @@ class StudentController extends Controller
         $searchTerm = $request->input('name_search');
 
         $results = Student::where('name', 'like', '%' . $searchTerm . '%')
-        ->orWhere('lastname', 'like', '%' . $searchTerm . '%')
-        ->orWhereRaw("CONCAT(name, ' ', lastname) like ?", ['%' . $searchTerm . '%'])
-        ->get();
+            ->orWhere('lastname', 'like', '%' . $searchTerm . '%')
+            ->orWhereRaw("CONCAT(name, ' ', lastname) like ?", ['%' . $searchTerm . '%'])
+            ->get();
 
         if ($results->isEmpty()) {
             $results = Student::all();
@@ -32,47 +32,48 @@ class StudentController extends Controller
         return view('students.index', ['results' => $results, 'birthdays' => $birthday]);
     }
 
-    public function create() : View
+    public function create(): View
     {
         return view('students.create');
     }
 
-    public function store( StoreStudentRequest $request) : RedirectResponse
+    public function store(StoreStudentRequest $request): RedirectResponse
     {
-        Student::create($request->all());
+        //convierte la fecha de nacimiento en un objeto de carbon, luego obtiene el año actual y calcula la diferencia en años
         return redirect()->route('students.index')
-                ->withSuccess('Nuevo estudiante añadido correctamente.');
+            ->withSuccess('Nuevo estudiante añadido correctamente.');
     }
 
-    public function show(Student $student) : View
+    public function show(Student $student): View
     {
         return view('students.show', [
             'student' => $student
         ]);
     }
 
-    public function edit(Student $student) : View
+    public function edit(Student $student): View
     {
         return view('students.edit', [
             'students' => $student
         ]);
     }
 
-    public function update(UpdateStudentRequest $request, Student $student) : RedirectResponse
+    public function update(UpdateStudentRequest $request, Student $student): RedirectResponse
     {
         $student->update($request->all());
-        return redirect()->back()
-                ->withSuccess('Estudiante actualizado correctamente.');
+        return redirect()->route('students.index')
+            ->withSuccess('Estudiante actualizado correctamente.');
     }
-    
-    public function destroy(Student $student) : RedirectResponse
+
+    public function destroy(Student $student): RedirectResponse
     {
         $student->delete();
         return redirect()->route('students.index')
-                ->withSuccess('Estudiante eliminado correctamente.');
+            ->withSuccess('Estudiante eliminado correctamente.');
     }
 
-    public function birthday() {
+    public function birthday()
+    {
         $today = Carbon::now()->format('d-m');
         $students = DB::select('select name, lastname, birthdate from students');
         $birthdayboyos = [];
@@ -84,9 +85,10 @@ class StudentController extends Controller
         }
         return $birthdayboyos;
     }
-    
+
+
     //instanciando una función de otra clase
-/*     public function assistancePercentage() {
+    /*     public function assistancePercentage() {
         $parameter = new ParameterController();
         return $parameter->assistPercent();
     } */

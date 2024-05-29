@@ -34,7 +34,6 @@
         <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
             <div class="p-6 text-gray-900 dark:text-gray-100">
 
-
                 <!--EMPIEZA EL DIV DE AÑADIR ALUMNO-->
                 <div class="flex justify-center items-center mt-3">
                     <div class="w-full">
@@ -56,19 +55,34 @@
                         @endif
 
                         <div class="rounded px-8 pt-6 pb-8 mb-4">
-                            <div class="mb-4">
+                            <div class="mb-4 flex justify-between items-center">
                                 <a href="{{ route('students.create') }}"
-                                    class="bg-green-500 hover:bg-green-700 text-black font-bold py-2 px-4 rounded">Añadir
+                                    class="bg-green-500 hover:bg-green-700 text-black font-bold py-1 px-2 rounded">Añadir
                                     nuevo estudiante</a>
+                                <form action="{{ route('pdf.generatePDF') }}" method="get" class="ml-auto">
+                                    @csrf
+                                    <input type="hidden" name="generateList" value="studentList">
+                                    <button type="submit"
+                                        class="bg-green-500 hover:bg-green-700 text-black font-bold py-1 px-2 mr-1 rounded">Generar
+                                        PDF</button>
+                                </form>
+                                <form action="{{ route('export.students') }}" method="post">
+                                    @csrf
+                                    <button type="submit"
+                                        class="bg-green-500 hover:bg-green-700 text-black font-bold py-1 px-2 rounded">Exportar
+                                        a Excel</button>
+                                </form>
                             </div>
+
                             <table class="border-collapse border-b border-gray-600 w-full h-full rounded-lg">
                                 <thead>
                                     <tr>
                                         <th class="border-b border-gray-600 px-4 py-2 text-center">DNI</th>
                                         <th class="border-b border-gray-600 px-4 py-2 text-center">Nombre</th>
                                         <th class="border-b border-gray-600 px-4 py-2 text-center">Apellido</th>
-                                        <th class="border-b border-gray-600 px-4 py-2 text-center">Nacimiento</th>
-                                        <th class="border-b border-gray-600 px-4 py-2 text-center">Porcentaje</th>
+                                        {{-- <th class="border-b border-gray-600 px-4 py-2 text-center">Nacimiento</th> --}}
+                                        <th class="border-b border-gray-600 px-4 py-2 text-center">Condición</th>
+                                        <th class="border-b border-gray-600 px-4 py-2 text-center">Año</th>
                                         <th class="border-b border-gray-600 px-4 py-2 text-center">Acción</th>
                                     </tr>
                                 </thead>
@@ -81,10 +95,14 @@
                                                 {{ $student->name }}</td>
                                             <td class="border-b border-gray-600 px-4 py-2 text-center">
                                                 {{ $student->lastname }}</td>
+                                            {{-- <td class="border-b border-gray-600 px-4 py-2 text-center">
+                                                {{ date('d-m-Y', strtotime($student->birthdate)) }}</td> --}}
+
+                                            {!! $student->condition($student->id) !!}
+
                                             <td class="border-b border-gray-600 px-4 py-2 text-center">
-                                                {{ date('d-m-Y', strtotime($student->birthdate)) }}</td>
-                                            <td class="border-b border-gray-600 px-4 py-2 text-center">
-                                                {{$student->percentage() }}</td>
+                                                {{ $student->grade }}</td>
+
                                             <td class="border-b border-gray-600 px-4 py-2 text-center">
                                                 <form action="{{ route('students.destroy', $student->id) }}"
                                                     method="post">
@@ -96,7 +114,6 @@
 
                                                     <a href="{{ route('students.show', $student->id) }}"
                                                         class="bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-3 rounded">Mostrar</a>
-
 
                                                     <button type="submit"
                                                         onclick="return confirm('¿Desea borrar el estudiante?');"
@@ -118,13 +135,8 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
-    </div>
-    </div>
-    </div>
-    </div>
     </div>
 
 </x-app-layout>

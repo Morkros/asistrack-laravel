@@ -4,10 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Student;
-use App\Models\Assists;
-use Illuminate\Support\Facades\DB;
+use App\Models\Assist;
 use App\Models\Parameter;
 use Illuminate\View\View;
+use App\Exports\StudentExport;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\StoreStudentRequest;
 use App\Http\Requests\UpdateStudentRequest;
@@ -19,7 +22,25 @@ class ParameterController extends Controller
      */
     public function index()
     {
+    }
 
+    public function generatePDF(Request $request)
+    {
+        // HTML que deseas convertir en PDF
+        $html = $request->input('generateList');
+
+        $students = Student::all();
+        if ($students->isEmpty()) {
+            return redirect()->back()->withErrors('No hay estudiantes registrados.');
+        } else {
+            $pdf = PDF::loadView('parameter.studentPDF', ['results' => $students]);
+            return $pdf->download('archivo.pdf');
+        }
+    }
+
+    public function exportStudents()
+    {
+        return Excel::download(new StudentExport, 'students.xlsx');
     }
 
     /**
@@ -37,12 +58,12 @@ class ParameterController extends Controller
     {
 
         $input = $request->all();
-      
+
         Parameter::create($input);
-       
+
         return back()->with('status', 'success');
     }
-  
+
     /**
      * Display the specified resource.
      */
@@ -68,18 +89,18 @@ class ParameterController extends Controller
     {
         // Actualiza el objeto con los datos del request
         DB::table('parameters')
-              ->where('id', $request->id)
-              ->update([
+            ->where('id', $request->id)
+            ->update([
                 'total_class_days' => $request->total_class_days,
                 'promotion' => $request->promotion,
                 'regular' => $request->regular
-                ]);
-    
+            ]);
+
         // Redirige de vuelta con un mensaje de éxito
         return redirect()->back()
-                ->withSuccess('Estudiante actualizado correctamente.');
+            ->withSuccess('Estudiante actualizado correctamente.');
     }
-    
+
 
     /**
      * Remove the specified resource from storage.
@@ -88,20 +109,4 @@ class ParameterController extends Controller
     {
         //
     }
-
-    /* public function assistPercent () {
-        $students = DB::select('select id, dni from students');
-
-        $totalAssistance = [];
-        foreach ($students as $student) {
-            $totalAssists = DB::table('assists')
-            ->where('student_id', $student->id)
-            ->count();
-            
-           $totalAssist = $totalAssist->count();
-            $totalAssistCount[] = $totalAssist;
-        }
-        dd($totalAssists);
-        return $totalAssistCount;
-    } */
 }

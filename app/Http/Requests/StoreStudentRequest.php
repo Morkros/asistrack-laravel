@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\ValidateAge;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreStudentRequest extends FormRequest
@@ -25,7 +26,7 @@ class StoreStudentRequest extends FormRequest
             'dni' => 'required|numeric|digits:8|unique:students,dni',
             'name' => 'required|string|max:30',
             'lastname' => 'required|string|max:30',
-            'birthdate' => 'required'
+            'birthdate' => ['required', new ValidateAge],
         ];
     }
 }
