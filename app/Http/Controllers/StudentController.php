@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
+use App\Models\Log;
 use App\Models\Student;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
@@ -29,7 +30,8 @@ class StudentController extends Controller
 
     public function store(StoreStudentRequest $request): RedirectResponse
     {
-        //convierte la fecha de nacimiento en un objeto de carbon, luego obtiene el año actual y calcula la diferencia en años
+        Student::create($request->all());
+        $this->createLog($request, 'create');
         return redirect()->route('students.index')
             ->withSuccess('Nuevo estudiante añadido correctamente.');
     }
@@ -51,13 +53,16 @@ class StudentController extends Controller
     public function update(UpdateStudentRequest $request, Student $student): RedirectResponse
     {
         $student->update($request->all());
+        $this->createLog($request, 'update');
         return redirect()->route('students.index')
             ->withSuccess('Estudiante actualizado correctamente.');
     }
 
-    public function destroy(Student $student): RedirectResponse
+    public function destroy(Request $request, Student $student): RedirectResponse
     {
+
         $student->delete();
+        $this->createLog($request, 'delete');
         return redirect()->route('students.index')
             ->withSuccess('Estudiante eliminado correctamente.');
     }
@@ -100,6 +105,35 @@ class StudentController extends Controller
         }
 
         return $results;
+    }
+
+    public function createLog(Request $request, $action) {
+        $currentUser = $request->user()->id;
+        //$currentUser = Auth::user()->id;
+        //currentUser = Auth()->user();
+        $currentBrowser = $request->header('user_agent');
+        //$currentBrowser = $_SERVER['HTTP_SEC_CH_UA'];
+        //$currentBrowser = $request->user_Agent();
+        $currentIP = $request -> ip();
+
+        $newLog = new Log;
+ 
+        $newLog->user_id = $currentUser;
+        $newLog->action = $action;
+        $newLog->user_ip = $currentIP;
+        $newLog->user_browser = $currentBrowser;
+
+        /* switch ($action) {
+            case 'create':
+                $newLog->action = 
+                break;
+            case 'update':
+                break;
+            case 'delete':
+                break;
+        } */
+
+        $newLog->save();
     }
 
 /*     public function studentSearch (Request $request) {

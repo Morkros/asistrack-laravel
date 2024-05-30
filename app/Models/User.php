@@ -46,4 +46,8 @@ class User extends Authenticatable
     public function parameter(){
         return $this -> hasOne(Parameter::class);
     }
+
+    public function log(){
+        return $this-> hasMany(Log::class);
+    }
 }
