@@ -56,12 +56,17 @@ class ParameterController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+        $regular = $request->input('regular');
+        $promotion = $request->input('promotion');
 
-        $input = $request->all();
+        if ($regular > $promotion) {
+            return back()->with('status', 'error');
+        } else {
+            $input = $request->all();
+            Parameter::create($input);
 
-        Parameter::create($input);
-
-        return back()->with('status', 'success');
+            return back()->with('status', 'success');
+        }
     }
 
     /**
@@ -87,18 +92,23 @@ class ParameterController extends Controller
      */
     public function update(Request $request)
     {
-        // Actualiza el objeto con los datos del request
-        DB::table('parameters')
-            ->where('id', $request->id)
-            ->update([
-                'total_class_days' => $request->total_class_days,
-                'promotion' => $request->promotion,
-                'regular' => $request->regular
-            ]);
+        if ($request->regular > $request->promotion) {
+            return redirect()->back()
+                ->with('status', 'error');
+        } else {
+            // Actualiza el objeto con los datos del request
+            DB::table('parameters')
+                ->where('id', $request->id)
+                ->update([
+                    'total_class_days' => $request->total_class_days,
+                    'promotion' => $request->promotion,
+                    'regular' => $request->regular
+                ]);
 
-        // Redirige de vuelta con un mensaje de éxito
-        return redirect()->back()
-            ->withSuccess('Estudiante actualizado correctamente.');
+            // Redirige de vuelta con un mensaje de éxito
+            return redirect()->back()
+                ->with('status', 'success');
+        }
     }
 
 

@@ -17,8 +17,15 @@
                     <div class="text-center mt-5">
                         <form action="{{ route('students.index') }}" method="GET">
                             <div class="space-y-4">
-                                <input type="text" class="w-5/6 text-black font-bold rounded" id="name_search"
+                                <input type="text" class="w-3/6 text-black font-bold rounded" id="name_search"
                                     name="name_search" placeholder="Buscar por nombre">
+                                <select class="text-black font-bold rounded" id="search_grade" name="search_grade"
+                                    required>
+                                    <option value="Todos">Todos los años</option>
+                                    <option value="1ro">Primer año</option>
+                                    <option value="2do">Segundo año</option>
+                                    <option value="3ro">Tercer año</option>
+                                </select>
                                 <br>
                                 <button type="submit"
                                     class=" bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded">Buscar</button>

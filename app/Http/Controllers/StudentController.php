@@ -16,17 +16,7 @@ class StudentController extends Controller
 
     public function index(Request $request)
     {
-        $searchTerm = $request->input('name_search');
-
-        $results = Student::where('name', 'like', '%' . $searchTerm . '%')
-            ->orWhere('lastname', 'like', '%' . $searchTerm . '%')
-            ->orWhereRaw("CONCAT(name, ' ', lastname) like ?", ['%' . $searchTerm . '%'])
-            ->get();
-
-        if ($results->isEmpty()) {
-            $results = Student::all();
-        }
-
+        $results = $this->studentSearch($request);
         $birthday = $this->birthday();
 
         return view('students.index', ['results' => $results, 'birthdays' => $birthday]);
@@ -85,6 +75,55 @@ class StudentController extends Controller
         }
         return $birthdayboyos;
     }
+
+    public function studentSearch(Request $request) {
+        $searchTerm = $request->input('name_search');
+        $searchGrade = $request->input('search_grade');
+
+        if ($searchGrade === 'Todos') {
+            $results = Student::where('name', 'like', '%' . $searchTerm . '%')
+                ->orWhere('lastname', 'like', '%' . $searchTerm . '%')
+                ->orWhereRaw("CONCAT(name, ' ', lastname) like ?", ['%' . $searchTerm . '%'])
+                ->get();
+
+            
+        } else {
+            $results = Student::where('name', 'like', '%' . $searchTerm . '%')
+                ->orWhere('lastname', 'like', '%' . $searchTerm . '%')
+                ->orWhereRaw("CONCAT(name, ' ', lastname) like ?", ['%' . $searchTerm . '%'])
+                ->where('grade', '=', $searchGrade)
+                ->get();
+        }
+
+        if ($results->isEmpty()) {
+            $results = Student::all();
+        }
+
+        return $results;
+    }
+
+/*     public function studentSearch (Request $request) {
+        $searchTerm = $request->input('name_search');
+        $searchGrade = $request->input('search_grade');
+
+        $results = Student::query();
+
+        if ($searchTerm === !null) {
+            if ($searchGrade === 'Todos') {
+                $results->where('name', $searchTerm);
+            } else {
+                $results->where('name', $searchTerm)
+                    ->where('grade', $searchGrade);
+            }    
+        }
+
+        $results->orderby('lastname', 'ASC');
+        
+        $results->get();
+
+        return $results;
+    } */
+
 
 
     //instanciando una función de otra clase

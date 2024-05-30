@@ -32,17 +32,17 @@
         
         <div>
             <x-input-label for="total_class_days" :value="__('Total de días de clase:')" />
-            <x-text-input id="total_class_days" name="total_class_days" type="number" class="mt-1 block w-full" required/>
+            <x-text-input id="total_class_days" name="total_class_days" type="number" class="mt-1 block w-full" value="{{ old('total_class_days', $parameter[0]->total_class_days ?? '') }}" required/>
         </div>
 
         <div>
             <x-input-label for="promotion" :value="__('Porcentaje para promocionar:')" />
-            <x-text-input id="promotion" name="promotion" type="number" class="mt-1 block w-full" required/>
+            <x-text-input id="promotion" name="promotion" type="number" class="mt-1 block w-full" value="{{ old('promotion', $parameter[0]->promotion ?? '') }}" required/>
         </div>
 
         <div>
             <x-input-label for="regular" :value="__('Porcentaje para regularidad:')" />
-            <x-text-input id="regular" name="regular" type="number" class="mt-1 block w-full" required/>
+            <x-text-input id="regular" name="regular" type="number" class="mt-1 block w-full" value="{{ old('regular', $parameter[0]->regular ?? '') }}" required/>
         </div>
 
         <div class="flex items-center gap-4">
@@ -53,9 +53,18 @@
                     x-data="{ show: true }"
                     x-show="show"
                     x-transition
-                    x-init="setTimeout(() => show = false, 2000)"
-                    class="text-sm text-gray-600 dark:text-gray-400"
+                    x-init="setTimeout(() => show = false, 3000)"
+                    class="text-sm text-green-600 dark:text-green-400"
                 >{{ __('Actualizado') }}</p>
+            @endif
+            @if (session('status') === 'error')
+                <p
+                    x-data="{ show: true }"
+                    x-show="show"
+                    x-transition
+                    x-init="setTimeout(() => show = false, 5000)"
+                    class="text-sm text-red-600 dark:text-red-400"
+                >{{ __('Verifique los valores ingresados') }}</p>
             @endif
         </div>
          
