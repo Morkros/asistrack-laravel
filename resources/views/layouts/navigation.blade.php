@@ -52,6 +52,9 @@
                             {{ __('Perfil') }}
                         </x-dropdown-link>
 
+                        <x-dropdown-link :href="route('profile.edit')">
+                            {{ __('Perfil') }}
+                        </x-dropdown-link>
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
