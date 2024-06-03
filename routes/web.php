@@ -47,11 +47,10 @@ Route::middleware('auth')->group(function () {
     
     Route::post('parameter', [ParameterController::class, 'store'])->name('parameter.store');
     Route::put('parameter/{id}', [ParameterController::class, 'update'])->name('parameter.update');
+    Route::get('registry', [ParameterController::class, 'logList'])->name('parameter.logRegistry');	
 
     Route::get('parameter', [ParameterController::class, 'generatePDF'])->name('pdf.generatePDF');
     Route::post('/export/students', [ParameterController::class, 'exportStudents'])->name('export.students');
-
-    //Route::get('pdf', [app\Http\Controllers\GeneratePDFController::class, 'generatePDF'])->name('pdf.generatePDF');
 
     //muestra el calendario de asistencias
     Route::get('/calendar', function () {

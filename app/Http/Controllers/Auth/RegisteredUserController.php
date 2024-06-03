@@ -18,9 +18,15 @@ class RegisteredUserController extends Controller
     /**
      * Display the registration view.
      */
-    public function create(): View
+    public function create(Request $request)
     {
-        return view('auth.register');
+        $routeName = $request->route()->getName();
+
+        if ($routeName == 'register') {
+            return view('auth.register');
+        } elseif ($routeName == 'registerAdmin') {
+            return view('auth.registerAdmin');
+        }
     }
 
     /**
@@ -33,12 +39,14 @@ class RegisteredUserController extends Controller
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'admin' => ['required'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
+            'admin' => $request->admin,
             'password' => Hash::make($request->password),
         ]);
 

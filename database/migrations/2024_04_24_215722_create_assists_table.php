@@ -13,7 +13,9 @@ return new class extends Migration
     {
         Schema::create('assists', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('student_id')->references('id')->on('students');
+            $table->foreignId('student_id')
+                  ->constrained('students')
+                  ->onDelete('cascade');
             $table->timestamps();
         });
     }

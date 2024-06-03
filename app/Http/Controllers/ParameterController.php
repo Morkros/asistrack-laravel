@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Student;
+use App\Models\user;
 use App\Models\Assist;
+use App\Models\Student;
 use App\Models\Parameter;
 use Illuminate\View\View;
+use Illuminate\Http\Request;
 use App\Exports\StudentExport;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\StoreStudentRequest;
 use App\Http\Requests\UpdateStudentRequest;
@@ -111,12 +113,28 @@ class ParameterController extends Controller
         }
     }
 
-
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
     {
         //
+    }
+
+    public function logList(Request $request)
+    {
+        $currentUser = Auth::user();
+        $userAdmin = $currentUser->isAdmin($currentUser->id);
+        //dd($userAdmin);
+
+        if ($userAdmin == true) {
+            $logs = DB::table('users')
+                ->join('logs', 'logs.user_id', '=', 'users.id')
+                ->select('users.*', 'logs.*', 'logs.created_at as log_created_at')
+                ->get();
+            return view('parameter.logRegistry', ['logs' => $logs]);
+        } else {
+            return redirect()->back();
+        }
     }
 }

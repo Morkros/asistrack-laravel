@@ -21,6 +21,7 @@ class AssistFactory extends Factory
              * (pluck trae los datos de una columna en forma de array)
              */
             'student_id' => fake()->randomElement(Student::pluck('id')),
+            'created_at' => $this->faker->dateTime(),
         ];
     }
 }

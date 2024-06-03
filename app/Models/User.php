@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'admin',
     ];
 
     /**
@@ -43,11 +44,25 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function parameter(){
-        return $this -> hasOne(Parameter::class);
+    public function parameter()
+    {
+        return $this->hasOne(Parameter::class);
     }
 
-    public function log(){
-        return $this-> hasMany(Log::class);
+    public function log()
+    {
+        return $this->hasMany(Log::class);
+    }
+
+    public function isAdmin($id)
+    {
+        $user = User::find($id);
+
+        if ($user->admin === 'Y') {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
+

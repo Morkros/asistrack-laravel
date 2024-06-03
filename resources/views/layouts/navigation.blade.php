@@ -52,9 +52,13 @@
                             {{ __('Perfil') }}
                         </x-dropdown-link>
 
-                        <x-dropdown-link :href="route('profile.edit')">
-                            {{ __('Perfil') }}
-                        </x-dropdown-link>
+                        {{-- Sun función es usar la función isAdmin para saber si el usuario es administrador o no --}}
+                        @if (Auth::user()->isAdmin(Auth::id()))
+                            <x-dropdown-link :href="route('parameter.logRegistry')">
+                                {{ __('Registros') }}
+                            </x-dropdown-link>
+                        @endif
+
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf

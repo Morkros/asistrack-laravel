@@ -1,6 +1,9 @@
 <x-guest-layout>
-    <form method="POST" action="{{ route('register') }}">
+    <form method="POST" action="{{ route('register.post') }}">
         @csrf
+        
+        <!-- Admin -->
+        <input type="hidden" name="admin" value="N">
 
         <!-- Name -->
         <div>

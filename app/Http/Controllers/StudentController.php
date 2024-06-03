@@ -112,7 +112,7 @@ class StudentController extends Controller
         //$currentUser = Auth::user()->id;
         //currentUser = Auth()->user();
         $currentBrowser = $request->header('user_agent');
-        //$currentBrowser = $_SERVER['HTTP_SEC_CH_UA'];
+        //$currentBrowser = $_SERVER['HTTP_SEC_CH_UA']; //solo funciona si el cliente tiene setteada esta opción
         //$currentBrowser = $request->user_Agent();
         $currentIP = $request -> ip();
 
