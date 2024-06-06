@@ -25,7 +25,7 @@ Para esta guía se utilizará laragon.
   Luego de iniciar sesión, en la parte derecha de la barra de navegación verá un panel desplegable, que muestra dos opciones (tres en caso de ser administrador, siendo la tercera la ventana de registros): perfil y desconectar.
   Haga click en `perfil`, lo que lo llevará a la vista de edición de perfil, donde podrá crear los tres parámetros necesarios para definir la condición de los alumnos: `total de días de clase`, `porcentaje para regularizar` y `porcentaje para promocionar`.
  ### Sección 'alumnos'
-  en esta sección de Asistrack podrá `crear` alumnos, `editar` o `mostrar `sus datos, y `eliminar` alumnos. También podrá `exportar` el listado completo de alumnos como PDF o archivo de Excel.
+  en esta sección de Asistrack podrá `crear` alumnos, `editar` o `mostrar` sus datos, y `eliminar` alumnos (además de generar una asistencia inmediata). También podrá `exportar` el listado completo de alumnos como PDF o archivo de Excel.
  ### Sección 'Buscar'
   Al ingresar el DNI de un alumno, podrá crear una asistencia inmediata (que almacena la fecha actual) o podrá mostrar el `total` de asistencias y ausencias que posee.
  ### Sección 'Calendario'
