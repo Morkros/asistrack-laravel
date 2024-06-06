@@ -10,7 +10,7 @@ Para esta guía se utilizará laragon.
 4. Ingresar `composer install`
 5. Ingresar `npm install`
 6. Generar la clave de la aplicación ingresando `php artisan key:generate --ansi`
-7. Crear las migraciones ingresando `php artisan migrate`
+7. Crear las migraciones ingresando `php artisan migrate` o `php artisan migrate --seed` para generar migraciones y registros.
 8. Iniciar el servidor local dando click en `Start` en el panel de Laragon (o ingresando `php artisan serve` en la terminal).
 9. Ingresar `npm run dev` en la terminal.
 10. Entrar a [http://127.0.0.1:8000/](http://127.0.0.1:8000/) o [http://asistrack-laravel.test/](http://asistrack-laravel.test/) para testear la aplicación.
