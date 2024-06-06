@@ -14,7 +14,7 @@ class DatabaseSeeder extends Seeder
     {
         \App\Models\Student::factory(10)->create();
         // \App\Models\User::factory(10)->create();
-        \App\Models\Assist::factory(10)->create(); //la cantidad de registros creado es 8 para facilitar la busqueda
+        \App\Models\Assist::factory(30)->create();
 
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',

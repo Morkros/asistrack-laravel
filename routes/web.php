@@ -7,21 +7,6 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ParameterController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
-
-//Route::get('/', function () { LLEVA AL WELCOME AL ENTRAR A LA PAGINA
-//    return view('welcome');
-//});
-
 //Route::redirect('/', 'index'); CREA UN REDIRECT HACIA EL INDEX DE ESTUDIANTES
 
 /* Route::get('/dashboard', function () { AL AUTENTIFICAR AL USUARIO, LO ENVIA AL DASHBOARD
@@ -40,9 +25,12 @@ Route::middleware('auth')->group(function () {
 
     Route::get('assist', [AssistController::class,"index"])->name('assists.index');
     Route::post('assist', [AssistController::class, 'getDni'])->name('assists.getDni');
-    Route::post('assist/{id}', [AssistController::class,"storeInstant"])->name('assists.instant');
     Route::get('assist/show/{id}', [AssistController::class, "show"])->name('assists.show');
-
+   
+    //ambas rutas llevan a la misma función, pero basandose en la ruta, retornan a una vista distinta: index de estudiante o index de asistencias
+    Route::post('assist/{id}', [AssistController::class,"storeInstant"])->name('assists.instant');
+    Route::post('student/{id}', [AssistController::class,"storeInstant"])->name('student.instant');
+    
     Route::post('calendar', [AssistController::class,"getDate"])->name('assists.getDate');
     
     Route::post('parameter', [ParameterController::class, 'store'])->name('parameter.store');

@@ -83,7 +83,7 @@ class AssistController extends Controller
     {
     }
 
-    public function storeInstant($id)
+    public function storeInstant(Request $request, $id)
     {
         date_default_timezone_set('America/Argentina/Buenos_Aires');
         $date = date('Y-m-d');
@@ -94,9 +94,17 @@ class AssistController extends Controller
 
         if (!$exists) {
             Assist::create(['student_id' => $id]);
-            return redirect()->route('assists.index')->withSuccess('Asistencia añadida correctamente.');
+            if ($request->is('assist/' .$id)) {
+                return redirect()->route('assists.index')->withSuccess('Asistencia añadida correctamente.');
+            } else {
+                return redirect()->route('students.index')->withSuccess('Asistencia añadida correctamente.');
+            }
         } else {
-            return redirect()->route('assists.index')->withError('Asistencia ya existente.');
+            if ($request->is('assist/' .$id)) {
+                return redirect()->route('assists.index')->withError('Asistencia ya existente.');
+            } else {
+                return redirect()->route('students.index')->withError('Asistencia ya existente.');
+            }
         }
     }
     /**

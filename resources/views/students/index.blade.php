@@ -56,6 +56,12 @@
                                 <span class="block sm:inline">{{ $message }}</span>
                             </div>
                         @endif
+                        @if ($message = Session::get('error'))
+                            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+                                role="alert">
+                                <span class="block sm:inline">{{ $message }}</span>
+                            </div>
+                        @endif
                         @if (isset($birthdays) && count($birthdays) > 0)
                             <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative"
                                 role="alert">
@@ -79,15 +85,15 @@
                                     <input type="hidden" name="generateList" value="studentList">
                                     <button type="submit"
                                         class="bg-green-500 hover:bg-green-700 text-black font-bold py-1 px-2 mr-1 rounded inline-flex items-center"><x-pdf-icon
-                                        class="h-4 w-4 fill-current text-black dark:text-black"></x-pdf-icon>
-                                    <span class="ml-2">Generar PDF</span></button>
+                                            class="h-4 w-4 fill-current text-black dark:text-black"></x-pdf-icon>
+                                        <span class="ml-2">Generar PDF</span></button>
                                 </form>
                                 <form action="{{ route('export.students') }}" method="post">
                                     @csrf
                                     <button type="submit"
                                         class="bg-green-500 hover:bg-green-700 text-black font-bold py-1 px-2 rounded inline-flex items-center"><x-excel-icon
-                                        class="h-4 w-4 fill-current text-black dark:text-black"></x-excel-icon>
-                                    <span class="ml-2">Generar Excel</span></button>
+                                            class="h-4 w-4 fill-current text-black dark:text-black"></x-excel-icon>
+                                        <span class="ml-2">Generar Excel</span></button>
                                 </form>
                             </div>
 
@@ -120,32 +126,43 @@
                                             <td class="border-b border-gray-600 px-4 py-2 text-center">
                                                 {{ $student->grade }}</td>
 
-                                            <td class="border-b border-gray-600 px-4 py-2 text-center">
-                                                <form action="{{ route('students.destroy', $student->id) }}"
-                                                    method="post">
-                                                    @csrf
-                                                    @method('DELETE')
-
-                                                    <a href="{{ route('students.edit', $student->id) }}"
-                                                        class="bg-yellow-500 hover:bg-yellow-700 text-black font-bold py-1.5 px-2 rounded inline-flex items-center mr-1">
-                                                        <x-edit-icon
-                                                            class="h-4 w-4 fill-current text-black dark:text-black"></x-edit-icon>
-                                                        <span class="ml-2">Editar</span>
-
+                                            <td class="border-b border-gray-600 px-4 py-2 text-center items-center">
+                                                <div
+                                                    class="flex flex-col md:flex-row justify-center items-center space-y-2 md:space-y-0 md:space-x-1">
+                                                    <form action="{{ route('student.instant', $student->id) }}"
+                                                        method="post">
+                                                        @csrf
+                                                        <button type="submit"
+                                                            class="bg-green-500 hover:bg-green-700 text-black font-bold py-2.5 px-2 rounded inline-flex items-center">
+                                                            <x-check-icon
+                                                                class="h-4 w-4 fill-current text-black dark:text-black"></x-check-icon>
+                                                        </button>
+                                                    </form>
+                                                    <form action="{{ route('students.destroy', $student->id) }}"
+                                                        method="post">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <a href="{{ route('students.edit', $student->id) }}"
+                                                            class="bg-yellow-500 hover:bg-yellow-700 text-black font-bold py-1.5 px-2 rounded inline-flex items-center">
+                                                            <x-edit-icon
+                                                                class="h-4 w-4 fill-current text-black dark:text-black"></x-edit-icon>
+                                                            <span class="ml-2">Editar</span>
+                                                        </a>
                                                         <a href="{{ route('students.show', $student->id) }}"
                                                             class="bg-blue-500 hover:bg-blue-700 text-black font-bold py-1.5 px-2 rounded inline-flex items-center">
                                                             <x-show-icon
                                                                 class="h-4 w-4 fill-current text-black dark:text-black"></x-show-icon>
                                                             <span class="ml-2">Mostrar</span>
                                                         </a>
-
                                                         <button type="submit"
                                                             onclick="return confirm('¿Desea borrar el estudiante?');"
                                                             class="bg-red-500 hover:bg-red-700 text-black font-bold py-1.5 px-2 rounded inline-flex items-center">
                                                             <x-deleteUser-icon
                                                                 class="h-4 w-4 fill-current text-black dark:text-black"></x-deleteUser-icon>
-                                                            <span class="ml-2">Eliminar</span></button>
-                                                </form>
+                                                            <span class="ml-2">Eliminar</span>
+                                                        </button>
+                                                    </form>
+                                                </div>
                                             </td>
                                         </tr>
                                     @empty
