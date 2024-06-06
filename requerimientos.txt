@@ -1,2 +1,0 @@
--incluir un vinculo en la barra de navegaci�n llamado "buscar" que lleve a una ventana que contenga un buscador por dni, que incluya el bot�n a�adir asistencia.
--explicar en el readme como realizar la clonación, el deploy (como el del año pasado)

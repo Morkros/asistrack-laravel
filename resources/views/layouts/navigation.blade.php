@@ -46,13 +46,13 @@
                             </div>
                         </button>
                     </x-slot>
-
+                    
                     <x-slot name="content">
                         <x-dropdown-link :href="route('profile.edit')">
                             {{ __('Perfil') }}
                         </x-dropdown-link>
 
-                        {{-- Sun función es usar la función isAdmin para saber si el usuario es administrador o no --}}
+                        {{-- Su función es usar la función isAdmin para saber si el usuario es administrador o no --}}
                         @if (Auth::user()->isAdmin(Auth::id()))
                             <x-dropdown-link :href="route('parameter.logRegistry')">
                                 {{ __('Registros') }}

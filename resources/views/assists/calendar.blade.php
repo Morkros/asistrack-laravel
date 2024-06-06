@@ -5,7 +5,7 @@
             <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
                 {{ __('Calendario') }}
             </h2>
-            <x-user-icon class="h-5 w-auto fill-current text-gray-800 dark:text-gray-200 ml-2"></x-user-icon>
+            <x-calendar-icon class="h-5 w-auto fill-current text-gray-800 dark:text-gray-200 ml-2"></x-calendar-icon>
         </div>
     </x-slot>
 
@@ -29,7 +29,11 @@
                                 </select>
                                 <br>
                                 <button type="submit"
-                                    class="bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded">Buscar</button>
+                                    class="bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded inline-flex items-center">
+                                    <x-search-icon
+                                        class="h-4 w-auto fill-current text-black dark:text-black"></x-search-icon>
+                                    <span class="ml-2">Buscar</span>
+                                </button>
                             </div>
                         </form>
                     </div>

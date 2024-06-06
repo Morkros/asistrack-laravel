@@ -41,7 +41,7 @@
         </div>
 
         <div>
-            <x-input-label for="regular" :value="__('Porcentaje para regularidad:')" />
+            <x-input-label for="regular" :value="__('Porcentaje para regularizar:')" />
             <x-text-input id="regular" name="regular" type="number" class="mt-1 block w-full" value="{{ old('regular', $parameter[0]->regular ?? '') }}" required/>
         </div>
 

@@ -28,7 +28,13 @@
                                 </select>
                                 <br>
                                 <button type="submit"
-                                    class=" bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded">Buscar</button>
+                                    class="bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded inline-flex items-center">
+                                    <x-search-icon
+                                        class="h-4 w-auto fill-current text-black dark:text-black"></x-search-icon>
+                                    <span class="ml-2">Buscar</span>
+                                </button>
+
+
                             </div>
                         </form>
                     </div>
@@ -64,20 +70,24 @@
                         <div class="rounded px-8 pt-6 pb-8 mb-4">
                             <div class="mb-4 flex justify-between items-center">
                                 <a href="{{ route('students.create') }}"
-                                    class="bg-green-500 hover:bg-green-700 text-black font-bold py-1 px-2 rounded">Añadir
-                                    nuevo estudiante</a>
+                                    class="bg-green-500 hover:bg-green-700 text-black font-bold py-1.5 px-2 rounded inline-flex items-center">
+                                    <x-createUser-icon
+                                        class="h-4 w-4 fill-current text-black dark:text-black"></x-createUser-icon>
+                                    <span class="ml-2">Nuevo estudiante</span></a>
                                 <form action="{{ route('pdf.generatePDF') }}" method="get" class="ml-auto">
                                     @csrf
                                     <input type="hidden" name="generateList" value="studentList">
                                     <button type="submit"
-                                        class="bg-green-500 hover:bg-green-700 text-black font-bold py-1 px-2 mr-1 rounded">Generar
-                                        PDF</button>
+                                        class="bg-green-500 hover:bg-green-700 text-black font-bold py-1 px-2 mr-1 rounded inline-flex items-center"><x-pdf-icon
+                                        class="h-4 w-4 fill-current text-black dark:text-black"></x-pdf-icon>
+                                    <span class="ml-2">Generar PDF</span></button>
                                 </form>
                                 <form action="{{ route('export.students') }}" method="post">
                                     @csrf
                                     <button type="submit"
-                                        class="bg-green-500 hover:bg-green-700 text-black font-bold py-1 px-2 rounded">Exportar
-                                        a Excel</button>
+                                        class="bg-green-500 hover:bg-green-700 text-black font-bold py-1 px-2 rounded inline-flex items-center"><x-excel-icon
+                                        class="h-4 w-4 fill-current text-black dark:text-black"></x-excel-icon>
+                                    <span class="ml-2">Generar Excel</span></button>
                                 </form>
                             </div>
 
@@ -117,14 +127,24 @@
                                                     @method('DELETE')
 
                                                     <a href="{{ route('students.edit', $student->id) }}"
-                                                        class="bg-yellow-500 hover:bg-yellow-700 text-black font-bold py-2 px-3 rounded">Editar</a>
+                                                        class="bg-yellow-500 hover:bg-yellow-700 text-black font-bold py-1.5 px-2 rounded inline-flex items-center mr-1">
+                                                        <x-edit-icon
+                                                            class="h-4 w-4 fill-current text-black dark:text-black"></x-edit-icon>
+                                                        <span class="ml-2">Editar</span>
 
-                                                    <a href="{{ route('students.show', $student->id) }}"
-                                                        class="bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-3 rounded">Mostrar</a>
+                                                        <a href="{{ route('students.show', $student->id) }}"
+                                                            class="bg-blue-500 hover:bg-blue-700 text-black font-bold py-1.5 px-2 rounded inline-flex items-center">
+                                                            <x-show-icon
+                                                                class="h-4 w-4 fill-current text-black dark:text-black"></x-show-icon>
+                                                            <span class="ml-2">Mostrar</span>
+                                                        </a>
 
-                                                    <button type="submit"
-                                                        onclick="return confirm('¿Desea borrar el estudiante?');"
-                                                        class="bg-red-500 hover:bg-red-700 text-black font-bold py-1.5 px-3 rounded">Eliminar</button>
+                                                        <button type="submit"
+                                                            onclick="return confirm('¿Desea borrar el estudiante?');"
+                                                            class="bg-red-500 hover:bg-red-700 text-black font-bold py-1.5 px-2 rounded inline-flex items-center">
+                                                            <x-deleteUser-icon
+                                                                class="h-4 w-4 fill-current text-black dark:text-black"></x-deleteUser-icon>
+                                                            <span class="ml-2">Eliminar</span></button>
                                                 </form>
                                             </td>
                                         </tr>

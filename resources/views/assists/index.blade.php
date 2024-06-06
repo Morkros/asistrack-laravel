@@ -5,7 +5,7 @@
             <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
                 {{ __('Buscador para añadir asistencias') }}
             </h2>
-            <x-user-icon class="h-5 w-auto fill-current text-gray-800 dark:text-gray-200 ml-2"></x-user-icon>
+            <x-search-icon class="h-5 w-auto fill-current text-gray-800 dark:text-gray-200 ml-2"></x-search-icon>
         </div>
     </x-slot>
 
@@ -22,7 +22,11 @@
                                     name="dni_search" placeholder="Buscar por dni">
                                 <br>
                                 <button type="submit"
-                                    class=" bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded">Buscar</button>
+                                    class="bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded inline-flex items-center">
+                                    <x-search-icon
+                                        class="h-4 w-auto fill-current text-black dark:text-black"></x-search-icon>
+                                    <span class="ml-2">Buscar</span>
+                                </button>
                             </div>
                         </form>
                     </div>
@@ -87,11 +91,18 @@
                                             {{-- <a href="{{ route('assists.create', $student->id) }}" class="bg-yellow-500 hover:bg-yellow-700 text-black font-bold py-2 px-4 rounded">As. Tardía</a> --}}
                                             <form action="{{ route('assists.instant', $student->id) }}" method="post">
                                                 @csrf
-                                                
-                                                <a href="{{ route('assists.show', $student->id) }}" class="bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded">Datos</a>
-                                                
+
+                                                <a href="{{ route('assists.show', $student->id) }}"
+                                                    class="bg-blue-500 hover:bg-blue-700 text-black font-bold py-1.5 px-3 rounded inline-flex items-center">
+                                                     <x-show-icon class="h-3 w-3 fill-current text-black dark:text-black"></x-show-icon>
+                                                     <span class="ml-2">Total</span>
+                                                 </a>
+                                                 
+
                                                 <button type="submit"
-                                                    class="bg-green-500 hover:bg-green-700 text-black font-bold py-1.5 px-4 rounded">Presente</button>
+                                                    class="bg-green-500 hover:bg-green-700 text-black font-bold py-1.5 px-3 rounded inline-flex items-center"><x-check-icon
+                                                    class="h-3 w-3 fill-current text-black dark:text-black"></x-check-icon>
+                                                <span class="ml-2">Presente</span></button>
                                             </form>
                                         </td>
                                     </tr>
